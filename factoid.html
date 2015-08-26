@@ -1,6 +1,6 @@
 <template name="factoid">
         <div class='header'>
-            <h1 class='didyouknow'>Did you know...?</h1>
+            <h1 class='didyouknow {{dykAnimation}}'>Did you know...?</h1>
         </div>
 
 
@@ -9,101 +9,120 @@
                 {{> Template.dynamic template=currentFactoid}}
             {{/Animate}}
         </div>
+        <script type="text/javascript">
+            var particle = new Particles().init();
+        </script>
 </template>
 
 <template name="fact1">
-    <p class='factoid animate'>
-        The average 21 year old has spent 5,000 hours playing video games,<br>
-        has exchanged 250,000 e-mails, instant and text messages <br>
-        and has spent 10,000 hours on the mobile phone.
+    <div class='vector animate'>
+        {{> cellphone}}
+    </div>
+
+    <p class='factoid animate {{currentAnimation}}'>
+        This first handheld cell phone weighed 2.4 pounds,<br>
+        and was 9 x 5 x 1.75 inches in size. <br><br>
+        The iPhone 6 is 5.44 x 2.64 x 0.27 inches,<br>
+        and weighs just 129 grams (0.28 pounds)
     </p>
 </template>
 
 <template name="fact2">
-    <p class='factoid animate'>
-        At the end of year 2012, <br>
-        there were total approximately 17 billion devices connected to the Internet.
+    <div class='vector animate'>
+        {{> bug}}
+    </div>
+
+    <p class='factoid animate {{currentAnimation}}'>
+        The first actual computer "bug" was a dead moth.<br>
+        It was stuck in a Harvard Mark II mainframe computer in 1947.
     </p>
 </template>
 
 <template name="fact3">
-    <p class='factoid animate'>
-        The very first Apple logo featured Sir Isaac Newton sitting underneath a tree,<br>
-        with an apple about to hit his head.
+    <div class='vector animate'>
+        {{> globe}}
+    </div>
+
+    <p class='factoid animate {{currentAnimation}}'>
+        Over 9 trillion text messages were sent globally in 2013. <br>
+        That equates to about 1,200 text messages per person per year.
     </p>
 </template>
 
 <template name="fact4">
-    <p class='factoid animate'>
+    <p class='factoid animate {{currentAnimation}}'>
         The fear of having no cell phone signal or otherwise being unable to make or receive cell phone calls is called Nomophobia.
     </p>
 </template>
 
 <template name="fact5">
-    <p class='factoid animate'>
+    <p class='factoid animate {{currentAnimation}}'>
         Surgeons who grew up playing video games make 37% fewer mistakes.
     </p>
 </template>
 
 <template name="fact6">
-    <p class='factoid animate'>
-        This first handheld cell phone weighed 2.4 pounds and was 9 x 5 x 1.75 inches in size. <br>
-        The iPhone 6 is 5.44 x 2.64 x 0.27 inches and weighs just 129 grams (0.28 pounds)
+    <p class='factoid animate {{currentAnimation}}'>
+        The average 21 year old has spent 5,000 hours playing video games,<br>
+        has exchanged 250,000 e-mails, instant and text messages <br>
+        and has spent 10,000 hours on mobile phones.
     </p>
 </template>
 
 <template name="fact7">
-    <p class='factoid animate'>
-        The first handheld cell phone had only 20 minutes of battery life when talking, <br>
-        and once the battery was drained, it took approximately 10 hours to fully recharge.
+    <p class='factoid animate {{currentAnimation}}'>
+        The first handheld cell phone had only 20 minutes of battery life, <br>
+        and once the battery was drained, it took 10 hours to fully recharge.
     </p>
 </template>
 
 <template name="fact8">
-    <p class='factoid animate'>
-        Over 9 trillion text messages were sent in 2013. <br>
-        That equates to about 1,200 text messages per person on the planet per year.
+    <p class='factoid animate {{currentAnimation}}'>
+        The first Apple logo featured Sir Isaac Newton sitting underneath a tree,<br>
+        with an apple about to hit his head.
     </p>
 </template>
 
 <template name="fact9">
-    <p class='factoid animate'>
-        In 2012 Apple sold more than 340,000 iPhones per day, which is around 4 per second
+    <p class='factoid animate {{currentAnimation}}'>
+        In 2012 Apple sold more than 340,000 iPhones per day,<br>
+        which is around 4 iPhones per second.
     </p>
 </template>
 
 <template name="fact10">
-    <p class='factoid animate'>
+    <p class='factoid animate {{currentAnimation}}'>
         Current mobile phones have more computing power than the computers used for the Apollo 11 to land on the moon.
     </p>
 </template>
 
 <template name="fact11">
-    <p class='factoid animate'>
+    <p class='factoid animate {{currentAnimation}}'>
         What is your monthly mobile phone bill?<br>
         £142,000 is the highest mobile bill ever.
     </p>
 </template>
 
 <template name="fact12">
-    <p class='factoid animate'>
+    <p class='factoid animate {{currentAnimation}}'>
         One ton of mobile phone waste contains 60 times more gold than one ton of gold ore.
     </p>
 </template>
 
 <template name="fact13">
-    <p class='factoid animate'>
+    <p class='factoid animate {{currentAnimation}}'>
+        At the end of year 2012, <br>
+        there were approximately 17 billion devices connected to the Internet.
+    </p>
+</template>
+
+<template name="fact14">
+    <p class='factoid animate {{currentAnimation}}'>
         Starting with an old cell phone, a teen used craigslist to keep trading up,<br>
         ultimately ending up with a Porsche Boxster S convertible.
     </p>
 </template>
 
-<template name="fact14">
-    <p class='factoid animate'>
-        The first actual computer "bug" was a dead moth.<br>
-        It was stuck in a Harvard Mark II mainframe computer in 1947.
-    </p>
-</template>
 
 <template name="fact">
     <p class='factoid animate'>

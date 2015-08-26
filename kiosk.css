@@ -157,9 +157,9 @@ a {
 html {
   font: 100%/1.5 "Roboto", Verdana, sans-serif;
 
-  color: #e4ecfa;
+  color: #d4dcea;
   background-color: #000;
-
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAI0lEQVQIW2NkwAT/GdHE/gP5jMiCYAGQIpggXAAmiCIAEgQAAE4FBbECyZcAAAAASUVORK5CYII=) #111;
 /*  color: #3d464d;
   background-color: #fff;
 */
@@ -198,11 +198,12 @@ html {
 \*-----------------------------------*/
 
 .header {
-  -webkit-animation: fadeInLeft 2s;
-  width:94%;
-  float: right;
-  /*margin-left: 8em;*/
-  margin-top: 8em;
+  /*-webkit-animation: fadeInLeft 2s;*/
+    -webkit-animation: hue 30s infinite linear;
+  width:38%;
+  text-align: center;
+  margin-left: 6em;
+  margin-top: 7em;
 }
 
   .didyouknow {
@@ -210,28 +211,42 @@ html {
     background-image: -webkit-linear-gradient(92deg,#f35626,#feab3a);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    -webkit-animation: hue 30s infinite linear;
-    /*-webkit-animation: hue 30s infinite linear;*/
     font-size: 10em;
   }
 
 .content {
-    width: 94%;
+    width: 96%;
     position: relative;
     float:right;
-    margin-top:30em;
-}
+    margin-top:24em;
 
-    .factoid {
-        position: absolute;
-        /*top:0;*/
-        /*text-align: right;*/
-        font-size: 4em;
-        margin-right: 3em;
-      font-weight: 300;
-      line-height: 1.7;
-      letter-spacing: -.04em;
+    top: 50%;
+    transform: translateY(-50%);
+}
+  .vector {
+    position: absolute;
+    top:-600px;
+    right: 75px;
+    height:512px;
+  }
+
+    .vector svg {
+      -webkit-animation: hue 10s infinite linear;
+      height:512px;
+      fill: url(#linearGradient);
     }
+
+  .factoid {
+    color: #e4ecfa;
+    position: absolute;
+    /*top:0;*/
+    /*text-align: right;*/
+    font-size: 4.6em;
+    margin-right: 1em;
+    font-weight: 300;
+    line-height: 1.7;
+    letter-spacing: -.00em;
+  }
 
 .site__content {
   -webkit-animation: bounceInUp 1s;
@@ -257,11 +272,45 @@ html {
   }
 }
 
-.factoid {
-    -webkit-animation: lightSpeedIn 2s;
-    /*-webkit-animation: fadeInRight 2s;*/
+.vector {
+  -webkit-animation: fadeInRight 2s;
 }
-.factoid.animate {
-    /*-webkit-animation: hinge 2s;*/
+
+.vector.animate{
+  -webkit-animation: fadeOutRight 2s;
+}
+
+.factoid.anim1 {
+    -webkit-animation: lightSpeedIn 2s;
+}
+.factoid.anim1.animate {
     -webkit-animation: fadeOutDown 2s;
+}
+
+.factoid.anim2 {
+    -webkit-animation: flipInY 2s;
+}
+.factoid.anim2.animate {
+    -webkit-animation: hinge 2s;
+}
+
+.factoid.anim3 {
+    -webkit-animation: rubberBand 2s;
+}
+.factoid.anim3.animate {
+    -webkit-animation: bounceOutLeft 2s;
+}
+
+.factoid.anim4 {
+    -webkit-animation: zoomInRight 2s;
+}
+.factoid.anim4.animate {
+    -webkit-animation: flipOutX 2s;
+}
+
+.factoid.anim5 {
+    -webkit-animation: rotateIn 2s;
+}
+.factoid.anim5.animate {
+    -webkit-animation: rotateOut 2s;
 }
