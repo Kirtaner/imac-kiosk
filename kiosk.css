@@ -231,7 +231,7 @@ html {
   }
 
     .vector svg {
-      -webkit-animation: hue 10s infinite linear;
+      -webkit-animation: hue 12s infinite linear;
       height:512px;
       fill: url(#linearGradient);
     }
