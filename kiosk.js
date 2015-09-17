@@ -4,57 +4,138 @@ Router.route('/', {
   template: 'factoid'
 });
 
-// Router.route('/list', {
-//   template: 'list'
-// });
+Router.route('/test', {
+  template: 'testcase'
+});
+
+Router.route('/customer', {
+  template: 'customerFormSemiAuto'
+});
+
+Router.route('/list', {
+  template: 'customerList'
+});
+
+
+
 
 
 
 /* Customer data schema */
 
-// Schemas = {};
+Schemas = {};
 
-// Template.registerHelper("Schemas", Schemas);
+Meteor.isClient && Template.registerHelper("Schemas", Schemas);
+
+Schemas.Customer = new SimpleSchema({
+  firstName: {
+    type: String,
+    index: 1,
+    unique: true
+  },
+  lastName: {
+    type: String,
+  },
+  emailAddress: {
+    type: String,
+    regEx: SimpleSchema.RegEx.Email
+  },
+  companyName: {
+    type: String,
+    optional: true
+  },
+  address: {
+    type: String,
+    optional: true
+  },
+  city: {
+    type: String,
+    optional: true
+  },
+  province: {
+    type: String,
+    optional: true
+  },
+  postalCode: {
+    type: String,
+  },
+  country: {
+    type: String,
+    optional: true
+  },
+  phoneNumber: {
+    type: Number,
+  },
 
 
-// Schemas.Customer = new SimpleSchema({
-//   firstName: {
-//     type: String,
-//     index: 1,
-//     unique: true
-//   },
-//   lastName: {
-//     type: String,
-//     optional: true
-//   },
-//   age: {
-//     type: Number,
-//     optional: true
-//   }
-// });
+});
 
-// var Collections = {};
+var Collections = {};
 
-// Template.registerHelper("Collections", Collections);
+Meteor.isClient && Template.registerHelper("Collections", Collections);
 
-// Customers = Collections.Customers = new Mongo.Collection('Customers');
+Customers = Collections.Customers = new Mongo.Collection('Customers');
 
-// Customers.attachSchema(Schemas.Customer);
+Customers.attachSchema(Schemas.Customer);
 
 // Meteor.publish(null, function () {
-//   return Customer.find();
+//   return Customers.find();
 // });
 
-// Customer.allow({
-//   insert: function () {
-//     return true;
-//   },
-//   remove: function () {
-//     return true;
-//   }
-// });
+Customers.allow({
+  insert: function () {
+    return true;
+  },
+  remove: function () {
+    return true;
+  }
+});
+
+if (Meteor.isClient) {
+
+  Template.customerForm.helpers({
+    customers: function () {
+      return Customers.find();
+    }
+  });
+
+  Template.customerList.helpers({
+    customers: function () {
+      return Customers.find();
+    }
+  });
+
+  Customers.find().observeChanges({
+    added: function(id, fields) {
+      console.log(fields);
+      notifyNewCustomer();
+    }
+  });
+
+  function notifyNewCustomer()
+  {
+    if (Notification.permission==="granted") {
+      var notification = new Notification("New Customer Queued", {
+        body: 'A customer has finished entering their personal details'
+      });
+
+      notification.onclick = function(e) {
+        window.focus();
+      }
+    }
+  }
+
+};
 
 
+
+
+
+
+
+
+
+/* Factoid 'demo' */
 
 if (Meteor.isClient) {
   // Initial factoid
@@ -130,6 +211,16 @@ if (Meteor.isClient) {
 
 
 }
+
+
+
+
+
+
+
+
+
+
 
 
 if (Meteor.isServer) {

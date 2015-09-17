@@ -1,17 +1,18 @@
 <template name="factoid">
-        <div class='header'>
-            <h1 class='didyouknow {{dykAnimation}}'>Did you know...?</h1>
-        </div>
+    <canvas id="canvas" style="position: absolute; z-index:3; top:-110px;"></canvas>
 
+    <div class='header'>
+        <h1 class='didyouknow {{dykAnimation}}'>Did you know...?</h1>
+    </div>
 
-        <div class='content'>
-            {{#Animate}}
-                {{> Template.dynamic template=currentFactoid}}
-            {{/Animate}}
-        </div>
-        <script type="text/javascript">
-            var particle = new Particles().init();
-        </script>
+    <div class='content'>
+        {{#Animate}}
+            {{> Template.dynamic template=currentFactoid}}
+        {{/Animate}}
+    </div>
+    <script type="text/javascript">
+        var particle = new Particles().init();
+    </script>
 </template>
 
 <template name="fact1">
@@ -123,16 +124,6 @@
     </p>
 </template>
 
-
-<template name="fact">
-    <p class='factoid animate'>
-    </p>
-</template>
-
-<template name="fact">
-    <p class='factoid animate'>
-    </p>
-</template>
 
 <template name="fact">
     <p class='factoid animate'>

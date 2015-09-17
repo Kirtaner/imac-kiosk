@@ -1,31 +1,116 @@
-<template name="customer-form">
+<template name="customerForm">
 
-{{#autoForm id="afInsertDemo" type="insert" collection=Collections.People}}
-  <div class="form-group {{#if afFieldIsInvalid name='firstName'}}has-error{{/if}}">
-    <label class="control-label">{{afFieldLabelText name='firstName'}}</label>
-    {{> afFieldInput name='firstName'}}
-    {{#if afFieldIsInvalid name='firstName'}}
-    <span class="help-block">{{{afFieldMessage name='firstName'}}}</span>
-    {{/if}}
+<div class="container" id="customerForm">
+  <div class="row">
+    <div class="col-sm-12"  style="background: #fff; margin-top: 10px; border-radius: 4px; color: #222;">
+      {{> quickForm id="customerData" type="insert" collection=Collections.Customers schema=Schemas.Customer}}
+    </div>
   </div>
-  <div class="form-group {{#if afFieldIsInvalid name='lastName'}}has-error{{/if}}">
-    <label class="control-label">{{afFieldLabelText name='lastName'}}</label>
-    {{> afFieldInput name='lastName'}}
-    {{#if afFieldIsInvalid name='lastName'}}
-    <span class="help-block">{{{afFieldMessage name='lastName'}}}</span>
-    {{/if}}
+</div>
+
+</template>
+
+
+
+<template name="customerFormSemiAuto">
+
+<div class="container" id="customerForm">
+  <div class="row">
+    <div class="col-sm-12"  style="background: #fff; margin-top: 10px; border-radius: 4px; color: #222; padding-top:20px">
+      <h2>Create Customer Profile</h2>
+      {{#autoForm id="customerData" type="insert" collection=Collections.Customers resetOnSuccess="true"}}
+        {{ > afQuickField name='firstName' placeholder='schemaLabel' label=false }}
+        {{ > afQuickField name='lastName' placeholder='schemaLabel' label=false }}
+        {{ > afQuickField name='emailAddress' placeholder='schemaLabel' label=false }}
+        {{ > afQuickField name='companyName' placeholder='schemaLabel' label=false }}
+        <!-- {{ > afQuickField name='address' placeholder='schemaLabel' label=false }} -->
+        <!-- {{ > afQuickField name='city' placeholder='schemaLabel' label=false }} -->
+        <!-- {{ > afQuickField name='province' placeholder='schemaLabel' label=false }} -->
+        {{ > afQuickField name='postalCode' placeholder='schemaLabel' label=false }}
+        <!-- {{ > afQuickField name='country' placeholder='schemaLabel' label=false }} -->
+        {{ > afQuickField name='phoneNumber' placeholder='schemaLabel' label=false }}
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <button type="reset" class="btn btn-default">Reset</button>
+        </div>
+      {{/autoForm}}
+    </div>
   </div>
-  <div class="form-group {{#if afFieldIsInvalid name='age'}}has-error{{/if}}">
-    <label class="control-label">{{afFieldLabelText name='age'}}</label>
-    {{> afFieldInput name='age'}}
-    {{#if afFieldIsInvalid name='age'}}
-    <span class="help-block">{{{afFieldMessage name='age'}}}</span>
-    {{/if}}
+</div>
+
+</template>
+
+
+<template name="customerFormModal">
+
+<div class="modal fade">
+  <div class="container" id="customerForm">
+    <div class="row">
+      <div class="col-sm-12"  style="background: #fff; margin-top: 10px; border-radius: 4px; color: #222; padding-top:20px">
+        <h2>Create Customer Profile</h2>
+        {{#autoForm id="customerData" type="insert" collection=Collections.Customers resetOnSuccess="true"}}
+          {{ > afQuickField name='firstName' placeholder='schemaLabel' label=false }}
+          {{ > afQuickField name='lastName' placeholder='schemaLabel' label=false }}
+          {{ > afQuickField name='emailAddress' placeholder='schemaLabel' label=false }}
+          {{ > afQuickField name='companyName' placeholder='schemaLabel' label=false }}
+          <!-- {{ > afQuickField name='address' placeholder='schemaLabel' label=false }} -->
+          <!-- {{ > afQuickField name='city' placeholder='schemaLabel' label=false }} -->
+          <!-- {{ > afQuickField name='province' placeholder='schemaLabel' label=false }} -->
+          {{ > afQuickField name='postalCode' placeholder='schemaLabel' label=false }}
+          <!-- {{ > afQuickField name='country' placeholder='schemaLabel' label=false }} -->
+          {{ > afQuickField name='phoneNumber' placeholder='schemaLabel' label=false }}
+
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="reset" class="btn btn-default">Reset</button>
+          </div>
+        {{/autoForm}}
+      </div>
+    </div>
   </div>
-  <div class="form-group">
-    <button type="submit" class="btn btn-primary">Add Person</button>
-    <button type="reset" class="btn btn-default">Reset Form</button>
+</div>
+
+</template>
+
+
+<template name="customerFormManual">
+
+<div class="container" id="customerForm">
+  <div class="row">
+    <div class="col-sm-12"  style="background: #fff; margin-top: 10px; border-radius: 4px; color: #222;">
+      {{#autoForm id="customerData" type="insert" collection=Collections.Customers}}
+        <div class="form-group {{#if afFieldIsInvalid name='firstName'}}has-error{{/if}}">
+          <label class="control-label">{{afFieldLabelText name='firstName'}}</label>
+          {{> afFieldInput name='firstName'}}
+          {{#if afFieldIsInvalid name='firstName'}}
+          <span class="help-block">{{{afFieldMessage name='firstName'}}}</span>
+          {{/if}}
+        </div>
+
+        <div class="form-group {{#if afFieldIsInvalid name='lastName'}}has-error{{/if}}">
+          <label class="control-label">{{afFieldLabelText name='lastName'}}</label>
+          {{> afFieldInput name='lastName'}}
+          {{#if afFieldIsInvalid name='lastName'}}
+          <span class="help-block">{{{afFieldMessage name='lastName'}}}</span>
+          {{/if}}
+        </div>
+
+        <div class="form-group {{#if afFieldIsInvalid name='companyName'}}has-error{{/if}}">
+          <label class="control-label">{{afFieldLabelText name='companyName'}}</label>
+          {{> afFieldInput name='companyName'}}
+          {{#if afFieldIsInvalid name='companyName'}}
+          <span class="help-block">{{{afFieldMessage name='companyName'}}}</span>
+          {{/if}}
+        </div>
+
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary">Add Person</button>
+          <button type="reset" class="btn btn-default">Reset Form</button>
+        </div>
+      {{/autoForm}}
+    </div>
   </div>
-{{/autoForm}}
+</div>
 
 </template>
