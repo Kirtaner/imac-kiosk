@@ -14,27 +14,39 @@
 
 <template name="customerFormSemiAuto">
 
-<div class="container" id="customerForm">
+<div class="container" id="customerForm" style="margin-top:10em">
   <div class="row">
-    <div class="col-sm-12"  style="background: #fff; margin-top: 10px; border-radius: 4px; color: #222; padding-top:20px">
-      <h2>Create Customer Profile</h2>
-      {{#autoForm id="customerData" type="insert" collection=Collections.Customers resetOnSuccess="true"}}
-        {{ > afQuickField name='firstName' placeholder='schemaLabel' label=false }}
-        {{ > afQuickField name='lastName' placeholder='schemaLabel' label=false }}
-        {{ > afQuickField name='emailAddress' placeholder='schemaLabel' label=false }}
-        {{ > afQuickField name='companyName' placeholder='schemaLabel' label=false }}
-        <!-- {{ > afQuickField name='address' placeholder='schemaLabel' label=false }} -->
-        <!-- {{ > afQuickField name='city' placeholder='schemaLabel' label=false }} -->
-        <!-- {{ > afQuickField name='province' placeholder='schemaLabel' label=false }} -->
-        {{ > afQuickField name='postalCode' placeholder='schemaLabel' label=false }}
-        <!-- {{ > afQuickField name='country' placeholder='schemaLabel' label=false }} -->
-        {{ > afQuickField name='phoneNumber' placeholder='schemaLabel' label=false }}
-
-        <div class="form-group">
-          <button type="submit" class="btn btn-primary">Submit</button>
-          <button type="reset" class="btn btn-default">Reset</button>
+    <div class="col-sm-4 col-sm-offset-4">
+      <img src="/svg/ttslogo.svg" style="width:100%">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-4 col-sm-offset-4">
+      <div class="panel panel-warning">
+        <div class="panel-heading">
+          <h3>Create Customer Profile</h3>
         </div>
-      {{/autoForm}}
+
+        <div class="panel-body">
+          {{#autoForm id="customerData" type="insert" collection=Collections.Customers resetOnSuccess="true"}}
+            {{ > afQuickField name='firstName' placeholder='schemaLabel' label=false }}
+            {{ > afQuickField name='lastName' placeholder='schemaLabel' label=false }}
+            {{ > afQuickField name='emailAddress' placeholder='schemaLabel' label=false }}
+            {{ > afQuickField name='companyName' placeholder='schemaLabel' label=false }}
+            <!-- {{ > afQuickField name='address' placeholder='schemaLabel' label=false }} -->
+            <!-- {{ > afQuickField name='city' placeholder='schemaLabel' label=false }} -->
+            <!-- {{ > afQuickField name='province' placeholder='schemaLabel' label=false }} -->
+            {{ > afQuickField name='postalCode' placeholder='schemaLabel' label=false }}
+            <!-- {{ > afQuickField name='country' placeholder='schemaLabel' label=false }} -->
+            {{ > afQuickField name='phoneNumber' placeholder='schemaLabel' type='tel' label=false pattern='[0-9]{10}' }}
+
+            <div class="form-group">
+              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="reset" class="btn btn-default">Reset</button>
+            </div>
+          {{/autoForm}}
+        </div>
+      </div>
     </div>
   </div>
 </div>
