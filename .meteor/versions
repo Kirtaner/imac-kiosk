@@ -1,4 +1,5 @@
 aldeed:autoform@5.4.1
+aldeed:autoform-bs-button-group-input@1.0.2
 aldeed:collection2@2.3.1
 aldeed:delete-button@1.0.0
 aldeed:simple-schema@1.1.0
@@ -9,6 +10,7 @@ binary-heap@1.0.3
 blaze@2.1.2
 blaze-tools@1.0.3
 boilerplate-generator@1.0.3
+brentjanderson:buzz@1.1.9
 callback-hook@1.0.3
 check@1.0.5
 coffeescript@1.0.6
@@ -52,6 +54,7 @@ nemo64:bootstrap@3.3.5_2
 nemo64:bootstrap-data@3.3.5
 observe-sequence@1.0.6
 ordered-dict@1.0.3
+peppelg:bootstrap-3-modal@1.0.3
 propercursive:zeroclipboard@0.0.1
 raix:handlebar-helpers@0.2.4
 random@1.0.3

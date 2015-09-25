@@ -17,6 +17,9 @@ Router.route('/list', {
 });
 
 
+Router.route('/mousetest', {
+  template: 'dick'
+});
 
 
 
@@ -63,10 +66,17 @@ Schemas.Customer = new SimpleSchema({
     type: String,
     optional: true
   },
-  phoneNumber: {
+  mobileNumber: {
     type: Number,
   },
-
+  phoneNumber: {
+    type: Number,
+    optional: true
+  },
+  acquisition: {
+    type: String,
+    // optional: true
+  }
 
 });
 
@@ -78,9 +88,6 @@ Customers = Collections.Customers = new Mongo.Collection('Customers');
 
 Customers.attachSchema(Schemas.Customer);
 
-// Meteor.publish(null, function () {
-//   return Customers.find();
-// });
 
 Customers.allow({
   insert: function () {
@@ -91,7 +98,15 @@ Customers.allow({
   }
 });
 
+
 if (Meteor.isClient) {
+  Template.registerHelper('acquisitionOptions', function(){
+    return {
+      Search: "Web Search",
+      Referral: "Referral",
+      WalkIn: "Walk-in"
+    };
+  });
 
   Template.customerForm.helpers({
     customers: function () {
@@ -107,10 +122,41 @@ if (Meteor.isClient) {
 
   Customers.find().observeChanges({
     added: function(id, fields) {
-      console.log(fields);
+      // console.log(fields);
       notifyNewCustomer();
+      Modal.hide('customerFormModal');
     }
   });
+
+  var idleModal;
+
+  Template.dick.events({
+    'mousemove': function(){
+      Modal.show('customerFormModal');
+    },
+    'keypress': function(){
+      Modal.show('customerFormModal');
+    }
+  });
+
+  Template.customerFormModal.events({
+    'mousemove': function(){
+      modalTimeout();
+    },
+    'keypress': function(){
+      modalTimeout();
+    }
+  });
+
+  Template.customerFormModal.rendered = function(){
+    modalTimeout();
+  }
+
+  function modalTimeout(){
+    clearTimeout(idleModal);
+    // Modal.show('customerFormModal');
+    idleModal = setTimeout(function(){ Modal.hide('customerFormModal'); }, 5000);
+  }
 
   function notifyNewCustomer()
   {
@@ -124,6 +170,30 @@ if (Meteor.isClient) {
       }
     }
   }
+
+  jQuery.fn.ForceNumericOnly =
+  function()
+  {
+      return this.each(function()
+      {
+          $(this).keydown(function(e)
+          {
+              var key = e.charCode || e.keyCode || 0;
+              // allow backspace, tab, delete, enter, arrows, numbers and keypad numbers ONLY
+              // home, end, period, and numpad decimal
+              return (
+                  key == 8 ||
+                  key == 9 ||
+                  key == 13 ||
+                  key == 46 ||
+                  key == 110 ||
+                  key == 190 ||
+                  (key >= 35 && key <= 40) ||
+                  (key >= 48 && key <= 57) ||
+                  (key >= 96 && key <= 105));
+          });
+      });
+  };
 
 };
 
