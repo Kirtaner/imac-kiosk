@@ -75,7 +75,7 @@ input, select, button, textarea {
   $TYPOGRAPHY
 \*-----------------------------------*/
 
-h1, .alpha {
+/*h1, .alpha {
   margin-bottom: 1.5rem;
 
   font-size: 3rem;
@@ -91,7 +91,7 @@ h2, .beta {
   font-size: 1.5rem;
   line-height: 1;
 }
-
+*/
 @media (min-width: 650px) {
   .mega {
     font-size: 6rem;

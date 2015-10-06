@@ -1,29 +1,3 @@
-/* Routes */
-
-Router.route('/', {
-  template: 'factoid'
-});
-
-Router.route('/test', {
-  template: 'testcase'
-});
-
-Router.route('/customer', {
-  template: 'customerFormSemiAuto'
-});
-
-Router.route('/list', {
-  template: 'customerList'
-});
-
-
-Router.route('/mousetest', {
-  template: 'dick'
-});
-
-
-
-
 /* Customer data schema */
 
 Schemas = {};
@@ -33,8 +7,7 @@ Meteor.isClient && Template.registerHelper("Schemas", Schemas);
 Schemas.Customer = new SimpleSchema({
   firstName: {
     type: String,
-    index: 1,
-    unique: true
+    index: false
   },
   lastName: {
     type: String,
@@ -47,35 +20,23 @@ Schemas.Customer = new SimpleSchema({
     type: String,
     optional: true
   },
-  address: {
-    type: String,
-    optional: true
-  },
-  city: {
-    type: String,
-    optional: true
-  },
-  province: {
-    type: String,
-    optional: true
-  },
   postalCode: {
     type: String,
   },
-  country: {
-    type: String,
-    optional: true
-  },
   mobileNumber: {
-    type: Number,
+    type: Number
   },
   phoneNumber: {
     type: Number,
     optional: true
   },
-  acquisition: {
+  howDidYouFindUs: {
     type: String,
     // optional: true
+  },
+  confirmed: {
+    type: Boolean,
+    optional: true
   }
 
 });
@@ -99,34 +60,97 @@ Customers.allow({
 });
 
 
+/* Customer data kiosk form */
+
+
 if (Meteor.isClient) {
+
+  Modal.allowMultiple = true;
+
+  var hooksObject = {
+    onSuccess: function(formType, result) {
+      // Initial submission
+      if (formType == 'insert') {
+        id = this.docId;
+        fields = this.insertDoc;
+
+        console.log(id);
+        console.log(fields);
+
+        Session.set('lastId', id);
+        Session.set('confirmInformation', fields);
+
+        Modal.show('confirmationModal');
+        // Modal.show('successModal');
+        // successModal = setTimeout(function(){ Modal.hide('successModal'); }, 5000);
+      }
+    }
+  };
+
+  AutoForm.hooks({
+    customerData: hooksObject
+  });
+
+
+  function notifyNewCustomer()
+  {
+    if (Notification.permission==="granted") {
+      var notification = new Notification("New Customer Queued", {
+        body: 'A customer has finished entering their personal details'
+      });
+
+      notification.onclick = function(e) {
+        window.focus();
+      }
+    }
+  }
+
+  Template.registerHelper('confirmInformation', function(){
+    return Session.get('confirmInformation');
+  });
+
   Template.registerHelper('acquisitionOptions', function(){
     return {
-      Search: "Web Search",
-      Referral: "Referral",
-      WalkIn: "Walk-in"
+      CSRH: "Web Search",
+      CREF: "Someone Told You About Us",
+      _CREF: "Walk-in"
     };
   });
 
-  Template.customerForm.helpers({
-    customers: function () {
-      return Customers.find();
-    }
-  });
+  showSuccessModal = function(){
+    id = Session.get('lastId');
+
+    Customers.update(id, {$set: {confirmed: true}}, {validate: false});
+
+    Modal.hide();
+
+    setTimeout(function(){ Modal.show('successModal'); }, 500);
+    setTimeout(function(){ Modal.hide('successModal'); }, 5000);
+  }
 
   Template.customerList.helpers({
     customers: function () {
-      return Customers.find();
+      // return Customers.find();
+      return Customers.find({confirmed:true});
     }
   });
 
   Customers.find().observeChanges({
     added: function(id, fields) {
-      // console.log(fields);
       notifyNewCustomer();
-      Modal.hide('customerFormModal');
+      // Modal.hide('customerFormModal');
     }
   });
+
+
+
+
+
+
+
+
+
+
 
   var idleModal;
 
@@ -157,43 +181,6 @@ if (Meteor.isClient) {
     // Modal.show('customerFormModal');
     idleModal = setTimeout(function(){ Modal.hide('customerFormModal'); }, 5000);
   }
-
-  function notifyNewCustomer()
-  {
-    if (Notification.permission==="granted") {
-      var notification = new Notification("New Customer Queued", {
-        body: 'A customer has finished entering their personal details'
-      });
-
-      notification.onclick = function(e) {
-        window.focus();
-      }
-    }
-  }
-
-  jQuery.fn.ForceNumericOnly =
-  function()
-  {
-      return this.each(function()
-      {
-          $(this).keydown(function(e)
-          {
-              var key = e.charCode || e.keyCode || 0;
-              // allow backspace, tab, delete, enter, arrows, numbers and keypad numbers ONLY
-              // home, end, period, and numpad decimal
-              return (
-                  key == 8 ||
-                  key == 9 ||
-                  key == 13 ||
-                  key == 46 ||
-                  key == 110 ||
-                  key == 190 ||
-                  (key >= 35 && key <= 40) ||
-                  (key >= 48 && key <= 57) ||
-                  (key >= 96 && key <= 105));
-          });
-      });
-  };
 
 };
 
@@ -290,12 +277,4 @@ if (Meteor.isClient) {
 
 
 
-
-
-
-if (Meteor.isServer) {
-  Meteor.startup(function () {
-    // code to run on server at startup
-  });
-}
 

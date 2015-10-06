@@ -4,7 +4,6 @@
 # 'meteor add' and 'meteor remove' will edit this file for you,
 # but you can also edit it by hand.
 
-meteor-platform
 autopublish
 insecure
 iron:router
@@ -13,7 +12,6 @@ aldeed:collection2
 frozeman:animation-helper
 jquery
 modweb:vivus
-yogiben:autoform-modals
 aldeed:delete-button
 less
 nemo64:bootstrap
@@ -22,3 +20,16 @@ matb33:collection-hooks
 peppelg:bootstrap-3-modal
 aldeed:autoform-bs-button-group-input
 brentjanderson:buzz
+standard-minifiers
+meteor-base
+mobile-experience
+mongo
+blaze-html-templates
+session
+tracker
+logging
+reload
+random
+ejson
+spacebars
+check
