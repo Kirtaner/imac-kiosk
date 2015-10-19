@@ -1,60 +1,100 @@
-<template name="testcase">
-    {{> dyk}}
+<template name="kiosk">
+
+    <link rel="stylesheet" type="text/css" href="/css/frames.css">
+    <script type="text/javascript" src="/js/tendrils.js"></script>
+
+    <script type="text/javascript">
+        var randomBackground = function() {
+            bg = Math.floor((Math.random() * 4) + 1);
+
+            while(Session.get('currentBackground') === bg) {
+                bg = Math.floor((Math.random() * 4) + 1);
+            }
+
+            Session.set('currentBackground', bg);
+        }
+    </script>
+
+    <style type="text/css">
+    html {
+        background: url('/images/bg/{{ currentBackground }}.jpg') no-repeat !important;
+        animation: panning 160s infinite linear;
+        -webkit-animation: panning 160s infinite linear;
+    }
+    </style>
+
+    <div style="height: 100%;">
+        {{> Template.dynamic template=currentFrame }}
+    </div>
+
 </template>
 
+<!-- test -->
+<template name="build">
+
+    <link rel="stylesheet" type="text/css" href="/css/frames.css">
+    <script type="text/javascript" src="/js/tendrils.js"></script>
+
+    <div style="height: 100%;">
+        {{> ttsCalloutBusiness }}
+    </div>
+
+</template>
+
+<!-- DID YOU KNOW animation -->
 <template name="dyk">
-    <div id="container" style="white-space: nowrap; width: 100%; height: 100%;">
+
+    <div id="container">
         <div style="margin-left: 10em; margin-top: 16em;">
             <div id="dykimg" style="position: relative;">
-                <img src="/svg/dyk3.svg" style="position: absolute; height: 700px; z-index: 2">
-                <img src="/svg/dyk4.svg" style="position: absolute; height: 600px; left: 500px">
+                <img class="ttshead" src="/svg/dyk3.svg" style="position: absolute; height: 700px; z-index: 2">
+                <img class="qmarks" src="/svg/dyk4.svg" style="position: absolute; height: 600px; left: 500px">
             </div>
 
             <div id="dyktext"
                  data-in-sequence="true"
                  data-in-effect="flip"
-                 data-out-effect="fadeOut"
-                 data-out-shuffle="true"
-                 style="font-size: 13em; color: white !important; font-family: proxima_nova_rgbold; position: absolute; left:-260px; top: 550px;">
+                 style="visibility: hidden; font-size: 13em; color: white !important; font-family: proxima_nova_rgbold; position: absolute; left:-260px; top: 560px;">
                 DID YOU KNOW?
             </div>
         </div>
     </div>
 
     <script type="text/javascript">
-        $(function(){
-            $('#dyktext').textillate();
-        });
+        setTimeout(function(){
+            $('#dyktext').textillate({
+            });
+        }, 1500);
+
+        setTimeout(function(){
+            $('#dykimg img').addClass('exit');
+            $('#dyktext').addClass('exit');
+        }, 6000);
+
+        setTimeout(function(){ Session.set('currentFrame', 'factoidFrame1'); }, 8000);
     </script>
 
-    <style type="text/css">
-        html, body {
-             background: url('/images/bg/1.jpg') no-repeat !important;
-             background-size: cover;
-             animation: panning 120s infinite linear;
-        }
-
-        @keyframes panning {
-            0% {
-                background-position: 0% 0%;
-            }
-            25% {
-                background-position: 100% 50%;
-            }
-            50% {
-                background-position: 100% 0%;
-            }
-            75% {
-                background-position: 0% 50%;
-            }
-            100% {
-                background-position: 0% 0%;
-            }
-        }
-    </style>
 </template>
 
-<template name="dick">
-{{ > factoid }}
 
+<!-- frame changers -->
+<template name="dykTimeout">
+    <script type="text/javascript">
+        setTimeout(function(){
+            Session.set('currentFrame', 'dyk');
+            randomBackground();
+        }, 8000);
+    </script>
+</template>
+
+
+<template name="ttsCalloutTimeout">
+    <script type="text/javascript">
+        setTimeout(function(){
+            dice = Array('ttsCalloutLive','ttsCalloutBusinessLive');
+            roll = dice[Math.floor(Math.random()*dice.length)];
+
+            Session.set('currentFrame', roll);
+        }, 8000);
+    </script>
 </template>

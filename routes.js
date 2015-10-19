@@ -1,7 +1,7 @@
 /* Routes */
 
 Router.route('/', {
-  template: 'factoid'
+  template: 'kiosk'
 });
 
 Router.route('/test', {
@@ -16,9 +16,6 @@ Router.route('/list', {
   template: 'customerList'
 });
 
-
-Router.route('/mousetest', {
-  template: 'dick'
+Router.route('/build', {
+  template: 'build'
 });
-
-

@@ -1,0 +1,289 @@
+<!-- scaffolding -->
+<template name="ttsCalloutLive">
+    {{ > ttsCallout }}
+    {{ > dykTimeout }}
+</template>
+
+<template name="ttsCalloutBusinessLive">
+    {{ > ttsCalloutBusiness }}
+    {{ > dykTimeout }}
+</template>
+
+
+<!-- facts frame -->
+<template name="factoidFrame1">
+
+    <style type="text/css">
+        #callout {
+            background: rgba(0, 0, 0, 0.3);
+            /*padding: 30px;*/
+            padding-bottom: 20px;
+            min-height: 50vh;
+
+        }
+        #callout p {
+            color: #fff;
+            font-size: 48pt;
+            font-weight: bold;
+            font-family: proxima_nova_rgbold;
+            margin: 10px;
+            padding: 40px 200px 0;
+        }
+    </style>
+
+    <div id="fact">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-12 calloutFact1" id="callout">
+                    {{> Template.dynamic template=currentFactoid}}
+                </div>
+            </div>
+
+            <div class="row" style="position: relative">
+                <div class="col-sm-4 col-sm-offset-7 ttsfoot" style="position: fixed; bottom: 20px;">
+                    <img src="/svg/ttslogo.svg" style="width:100%">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{ > ttsCalloutTimeout }}
+</template>
+
+
+<!-- quotes frame -->
+<template name="quoteFrame">
+
+</template>
+
+
+<!-- Main callout frame -->
+<template name="ttsCallout">
+
+    <style type="text/css">
+        .repairs {
+            font-family: proxima_nova_rgbold;
+            color: #fff;
+            font-size: 78pt;
+            text-align: center;
+            margin-top: 60px;
+            margin-bottom: 60px;
+            font-weight: bold;
+            text-shadow: -4px 4px 4px rgba(0,0,0,0.5);
+        }
+    </style>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 animate animated fadeInDown" style="margin-top: 20px">
+                <img src="/svg/ttslogo.svg" style="width:100%">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 repairs" style="visibility: hidden;">
+                <p>ALL DIGITAL DEVICE REPAIRS UNDER ONE ROOF</p>
+            </div>
+        </div>
+
+        {{> Template.dynamic template=ttsCalloutRandom }}
+        <!-- {{ > consoles }} -->
+        <!-- {{ > samsungServiceCentre }} -->
+    </div>
+
+    <script type="text/javascript">
+        $('.repairs p').textillate({
+            initialDelay: 800,
+
+            in: {
+                effect: 'bounceIn',
+                shuffle: true,
+                delay: 15,
+            },
+            out: {
+                effect: 'fadeOut',
+            },
+        });
+    </script>
+
+</template>
+
+
+<!-- Business callout frame -->
+<template name="ttsCalloutBusiness">
+
+    <style type="text/css">
+        .repairs {
+            font-family: proxima_nova_rgbold;
+            color: #fff;
+            font-size: 92pt;
+            text-align: center;
+            margin-top: 70px;
+            margin-bottom: 70px;
+            font-weight: bold;
+            text-shadow: -4px 4px 4px rgba(0,0,0,0.5);
+        }
+    </style>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12 animate animated fadeInDown" style="margin-top: 20px">
+                <img src="/svg/ttslogo.svg" style="width:100%">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 repairs" style="visibility: hidden;">
+                <p>HELP KEEP YOUR STAFF PRODUCTIVE</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 animated zoomInUp delay2 repairs">
+                Inquire About a Company Account<br>
+                For All Your Digital Repair Needs
+            </div>
+        </div>
+
+    </div>
+
+    <script type="text/javascript">
+        $('.repairs p').textillate({
+            initialDelay: 800,
+
+            in: {
+                effect: 'zoomInRight',
+                // shuffle: true,
+                delay: 25,
+            },
+            out: {
+                effect: 'fadeOut',
+            },
+        });
+    </script>
+
+</template>
+
+
+<!-- SAMSUNG -->
+<template name="samsungServiceCentre">
+
+    <div class="row">
+        <div class="col-sm-6 animated bounceInUp delay"  style="text-align: center; font-size: 72pt; color: #fff; font-family: Helvetica">
+            <img src="/svg/samsung.svg" style="width:100%;">
+            Authorized Service Centre
+        </div>
+        <div class="col-sm-6 animated bounceInUp delay">
+            <div style="position: relative">
+                <img src="/images/devices/tabs2.png" style="position: absolute; max-height: 520px;">
+                <img src="/images/devices/s62.png" style="position: absolute; max-height: 550px; left: 600px;">
+            </div>
+        </div>
+    </div>
+
+</template>
+
+
+<!-- CONSOLES -->
+<template name="consoles">
+    <style type="text/css">
+        .delay {
+            text-align: center;
+            text-shadow: -4px 4px 4px rgba(0,0,0,0.5);
+        }
+
+        span.subtext {
+            font-size: 72pt;
+            color: #fff;
+        }
+    </style>
+
+    <div class="row">
+
+        <div class="col-sm-4 animated bounceInLeft delay">
+            <img src="/svg/ps.svg" style="width:100%; max-height: 480px;">
+            <span class="subtext">PlayStation</span>
+        </div>
+
+        <div class="col-sm-4 animated bounceInUp delay" style="text-align:center; font-size: 120pt; color: #fff; margin-top: 80px">
+            1 DAY REPAIR
+        </div>
+
+        <div class="col-sm-4 animated bounceInRight delay">
+            <img src="/svg/xbox.svg" style="width:100%; max-height: 480px;">
+            <span class="subtext">Xbox</span>
+        </div>
+
+    </div>
+
+</template>
+
+
+<!-- APPLE -->
+<template name="apple">
+
+    <style type="text/css">
+        .delay {
+            text-align: center;
+            text-shadow: -4px 4px 4px rgba(0,0,0,0.5);
+        }
+
+        span.subtext {
+            font-size: 72pt;
+            color: #fff;
+        }
+    </style>
+
+    <div class="row">
+
+        <div class="col-sm-4 animated bounceInLeft delay">
+            <img src="/svg/ps.svg" style="width:100%; max-height: 480px;">
+            <span class="subtext">PlayStation</span>
+        </div>
+
+        <div class="col-sm-4 animated bounceInUp delay" style="text-align:center; font-size: 120pt; color: #fff; margin-top: 80px">
+            1 DAY REPAIR
+        </div>
+
+        <div class="col-sm-4 animated bounceInRight delay">
+            <img src="/svg/xbox.svg" style="width:100%; max-height: 480px;">
+            <span class="subtext">Xbox</span>
+        </div>
+
+    </div>
+
+</template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<template name="textillate">
+    <script type="text/javascript">
+        $('p.factoid').textillate({
+            // selector: '.fact',
+            autoStart: false,
+            // minDisplayTime: 2000,
+
+            in: {
+                effect: '{{ in }}',
+                delayScale: .1
+            },
+            out: {
+                effect: '{{ out }}',
+                // delay: 10
+            },
+
+            loop: false
+        });
+    </script>
+</template>

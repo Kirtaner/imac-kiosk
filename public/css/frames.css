@@ -1,0 +1,49 @@
+html, body {
+    margin:0;
+    padding:0;
+    font-family: proxima_nova_rgbold;
+
+    overflow: hidden;
+    width: 2560px !important;
+    max-width: 2560px !important;
+    height: 1440px !important;
+    max-height: 1440px !important;
+}
+
+html {
+     background: url('/images/bg/1.jpg') no-repeat;
+     /*background-size: cover;*/
+     animation: panning 160s infinite linear;
+     -webkit-animation: panning 160s infinite linear;
+}
+
+@-webkit-keyframes panning {
+    0% {
+        background-position: 0% 0%;
+    }
+    25% {
+        background-position: 75% 50%;
+    }
+    50% {
+        background-position: 75% 0%;
+    }
+    75% {
+        background-position: 0% 50%;
+    }
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+.delay {
+    -webkit-animation-delay: 2s;
+}
+
+.delay2 {
+    -webkit-animation-delay: 3s;
+}
+
+/*#container {
+    white-space: nowrap;
+}
+*/

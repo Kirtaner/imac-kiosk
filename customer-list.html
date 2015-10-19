@@ -1,74 +1,80 @@
 <template name="customerList">
+<style type="text/css">
+    body {
+        background: #111;
+    }
+</style>
+    <link rel="stylesheet" type="text/css" href="/css/customer.css">
 
-<div class="container" id="customerList" style="margin-top: 20px">
+    <div class="container" id="customerList" style="margin-top: 20px">
 
-    <div class="row">
-        <div class="col-sm-12">
-            <h2>Customer Profile Queue</h2>
+        <div class="row">
+            <div class="col-sm-12">
+                <h2>Customer Profile Queue</h2>
 
-            <div class="row">
-                {{#each customers}}
-                    <div class="col-sm-3">
-                        <div class="well">
-                            <h3>{{firstName}} {{lastName}}</h3>
-                            {{ emailAddress }}<br>
-                            {{ companyName }}<br>
-                            {{ postalCode }}<br>
-                            Mobile # - {{ mobileNumber }}<br>
-                            Secondary # - {{ phoneNumber }}<br>
-                            Acquisition - {{ howDidYouFindUs }}<br>
-                            <br>
+                <div class="row">
+                    {{#each customers}}
+                        <div class="col-sm-3">
+                            <div class="well">
+                                <h3>{{firstName}} {{lastName}}</h3>
+                                {{ emailAddress }}<br>
+                                {{ companyName }}<br>
+                                {{ postalCode }}<br>
+                                Mobile # - {{ mobileNumber }}<br>
+                                Secondary # - {{ phoneNumber }}<br>
+                                Acquisition - {{ howDidYouFindUs }}<br>
+                                <br>
 
-                            <button class="addCustomer btn btn-primary"
-                                    data-first="{{ firstName }}"
-                                    data-last="{{ lastName }}"
-                                    data-email="{{ emailAddress }}"
-                                    data-company="{{ companyName }}"
-                                    data-address="{{ address }}"
-                                    data-city="{{ city }}"
-                                    data-province="{{ province }}"
-                                    data-postal="{{ postalCode }}"
-                                    data-country="{{ country }}"
-                                    data-phone="{{ phoneNumber }}"
-                                    data-mobile="{{ mobileNumber }}">Add to RMS</button>
+                                <button class="addCustomer btn btn-primary"
+                                        data-first="{{ firstName }}"
+                                        data-last="{{ lastName }}"
+                                        data-email="{{ emailAddress }}"
+                                        data-company="{{ companyName }}"
+                                        data-address="{{ address }}"
+                                        data-city="{{ city }}"
+                                        data-province="{{ province }}"
+                                        data-postal="{{ postalCode }}"
+                                        data-country="{{ country }}"
+                                        data-phone="{{ phoneNumber }}"
+                                        data-mobile="{{ mobileNumber }}">Add to RMS</button>
 
-                            {{# quickRemoveButton collection=Collections.Customers _id=this._id class="btn btn-sm btn-danger"}}
-                                Clear
-                            {{/ quickRemoveButton}}
+                                {{# quickRemoveButton collection=Collections.Customers _id=this._id class="btn btn-sm btn-danger"}}
+                                    Clear
+                                {{/ quickRemoveButton}}
 
+                            </div>
                         </div>
-                    </div>
-                {{/each}}
+                    {{/each}}
+                </div>
             </div>
         </div>
+
+        <input style="opacity: 0" id="temp" type="text" value="">
+
     </div>
 
-    <input style="opacity: 0" id="temp" type="text" value="">
 
-</div>
+    <script type="text/javascript">
+        Notification.requestPermission();
 
+        $(document.body).on('click', 'button.addCustomer', function(){
 
-<script type="text/javascript">
-    Notification.requestPermission();
+            var phone = $(this).data('mobile').toString();
+            var formattedPhone = phone.substr(0,3) + ' ' + phone.substr(3,3) + ' ' + phone.substr(6,4);
 
-    $(document.body).on('click', 'button.addCustomer', function(){
+            $("#temp").val(formattedPhone).select();
+            success = document.execCommand("copy");
 
-        var phone = $(this).data('mobile').toString();
-        var formattedPhone = phone.substr(0,3) + ' ' + phone.substr(3,3) + ' ' + phone.substr(6,4);
+            document.getSelection().removeAllRanges();
 
-        $("#temp").val(formattedPhone).select();
-        success = document.execCommand("copy");
-
-        document.getSelection().removeAllRanges();
-
-        $.ajax({
-            method: "POST",
-            url: "http://192.168.1.98:8000/customer/add",
-            data: $(this).data()
-        }).done(function(data){
-            alert('Customer profile added to RMS');
+            $.ajax({
+                method: "POST",
+                url: "http://192.168.1.98:8000/customer/add",
+                data: $(this).data()
+            }).done(function(data){
+                alert('Customer profile added to RMS');
+            });
         });
-    });
-</script>
+    </script>
 
 </template>

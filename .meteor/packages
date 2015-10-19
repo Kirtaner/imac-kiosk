@@ -15,7 +15,6 @@ modweb:vivus
 aldeed:delete-button
 less
 nemo64:bootstrap
-propercursive:zeroclipboard
 matb33:collection-hooks
 peppelg:bootstrap-3-modal
 aldeed:autoform-bs-button-group-input
@@ -33,3 +32,4 @@ random
 ejson
 spacebars
 check
+gwendall:template-animations

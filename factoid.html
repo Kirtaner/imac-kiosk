@@ -10,18 +10,18 @@
             {{> Template.dynamic template=currentFactoid}}
         {{/Animate}}
     </div>
+
     <script type="text/javascript">
         var particle = new Particles().init();
     </script>
 </template>
 
-<template name="fact1">
-    <div class='vector animate'>
-        {{> cellphone}}
-    </div>
 
+<!-- GENERIC FACTS -->
+
+<template name="fact1">
     <p class='factoid animate {{currentAnimation}}'>
-        This first handheld cell phone weighed 2.4 pounds,<br>
+        The first handheld cell phone weighed 2.4 pounds,<br>
         and was 9 x 5 x 1.75 inches in size. <br><br>
         The iPhone 6 is 5.44 x 2.64 x 0.27 inches,<br>
         and weighs just 129 grams (0.28 pounds)
@@ -29,10 +29,6 @@
 </template>
 
 <template name="fact2">
-    <div class='vector animate'>
-        {{> bug}}
-    </div>
-
     <p class='factoid animate {{currentAnimation}}'>
         The first actual computer "bug" was a dead moth.<br>
         It was stuck in a Harvard Mark II mainframe computer in 1947.
@@ -40,10 +36,6 @@
 </template>
 
 <template name="fact3">
-    <div class='vector animate'>
-        {{> globe}}
-    </div>
-
     <p class='factoid animate {{currentAnimation}}'>
         Over 9 trillion text messages were sent globally in 2013. <br>
         That equates to about 1,200 text messages per person per year.
@@ -64,9 +56,10 @@
 
 <template name="fact6">
     <p class='factoid animate {{currentAnimation}}'>
-        The average 21 year old has spent 5,000 hours playing video games,<br>
-        has exchanged 250,000 e-mails, instant and text messages <br>
-        and has spent 10,000 hours on mobile phones.
+        The average 21 year old has spent
+        5,000 hours playing video games
+        exchanged 250,000 e-mails, instant and text messages
+        and spent 10,000 hours on mobile phones
     </p>
 </template>
 
@@ -106,7 +99,7 @@
 
 <template name="fact12">
     <p class='factoid animate {{currentAnimation}}'>
-        One ton of mobile phone waste contains 60 times more gold than one ton of gold ore.
+        One ton of mobile phone waste contains <span class="gold">60 times more gold</span> than one ton of gold ore.
     </p>
 </template>
 
@@ -125,11 +118,80 @@
 </template>
 
 
-<template name="fact">
+<!-- TECHKNOWSPACE FACTS -->
+
+<template name="ttsfact1">
     <p class='factoid animate'>
     </p>
 </template>
 
+
+<!--
+All Digital Device Repairs Under One Roof
+
+Chargers and Batteries for Laptops Macbooks & Phones
+
+1 Hour Smartphone Repair: Samsung iPhone Nokia Motorola LG Sony Blackberry HTC Huawei One Plus ...
+
+HELP KEEP YOUR STAFF PRODUCTIVE
+Inquire About a Company Account
+For All Your Business Digital Repair Needs
+
+WE ARE YOUR
+SAMSUNG AUTHORIZED
+SERVICE CENTRE
+
+FLASH MEMORY
+TRAVEL CHARGERS
+SYNC CABLES
+PEN / STYLUS
+TABLET & PHONE STANDS
+PORTABLE POWER
+WIRELESS CHARGING
+LAPTOP & TABLET CASES
+SCREEN PROTECTORS
+
+ALL PHONE BATTERIES
+$39.95
+
+ALL TABLETS REPAIRED
+IN 2 HOURS!
+
+PLAYSTATION & XBOX
+1 DAY REPAIR
+
+BLUETOOTH Headets Speakers Selfie Sticks Earphones Keyboards & Mice ...........................
+
+ROCK SOLID
+60 DAY WARRANTY
+ON ALL REPAIRS
+
+DATA RECOVERY
+Get Your Lost or Deleted
+Documents Photos & Videos Back
+
+Computer Infected With
+Viruses? Malware? Spyware?
+1 DAY VIRUS REMOVAL
+
+Macbook Experts
+Walk-In Service
+1 Day Repair
+
+Liquid Damage?
+Our Cleaning & Repair Process
+Has An 85% Success Rate
+
+1 HOUR
+LAPTOP SCREEN REPLACEMENT
+
+Convenient Locations To Serve You
+7 Days a Week t
+In Toronto at Front & Spadina Near The Rogers Centre
+Mississauga City Centre Opposite Square One
+
+
+ -->
 
 <!--
 

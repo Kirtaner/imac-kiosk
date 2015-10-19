@@ -114,9 +114,9 @@
         .prependTo($element);
 
       if (isInEffect(options.in.effect)) {
-        base.$current.css('visibility', 'hidden');
+        // base.$current.css('visibility', 'hidden');
       } else if (isOutEffect(options.out.effect)) {
-        base.$current.css('visibility', 'visible');
+        // base.$current.css('visibility', 'visible');
       }
 
       base.setOptions(options);
