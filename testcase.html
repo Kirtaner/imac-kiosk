@@ -5,10 +5,10 @@
 
     <script type="text/javascript">
         var randomBackground = function() {
-            bg = Math.floor((Math.random() * 4) + 1);
+            bg = Math.floor((Math.random() * 6) + 1);
 
             while(Session.get('currentBackground') === bg) {
-                bg = Math.floor((Math.random() * 4) + 1);
+                bg = Math.floor((Math.random() * 6) + 1);
             }
 
             Session.set('currentBackground', bg);
@@ -36,13 +36,23 @@
     <script type="text/javascript" src="/js/tendrils.js"></script>
 
     <div style="height: 100%;">
-        {{> ttsCalloutBusiness }}
+        {{> ttsCallout }}
     </div>
 
 </template>
 
 <!-- DID YOU KNOW animation -->
 <template name="dyk">
+    <style type="text/css">
+        #dyktext {
+            font-size: 13em;
+            color: white !important;
+            font-family: proxima_nova_rgbold;
+            position: absolute;
+            left: 590px;
+            top: 560px;
+        }
+    </style>
 
     <div id="container">
         <div style="margin-left: 10em; margin-top: 16em;">
@@ -54,9 +64,7 @@
             <div id="dyktext"
                  data-in-sequence="true"
                  data-in-effect="flip"
-                 style="visibility: hidden; font-size: 13em; color: white !important; font-family: proxima_nova_rgbold; position: absolute; left:-260px; top: 560px;">
-                DID YOU KNOW?
-            </div>
+                 style="visibility: hidden;">DID YOU KNOW?</div>
         </div>
     </div>
 
@@ -71,7 +79,7 @@
             $('#dyktext').addClass('exit');
         }, 6000);
 
-        setTimeout(function(){ Session.set('currentFrame', 'factoidFrame1'); }, 8000);
+        setTimeout(function(){ Session.set('currentFrame', 'factoidFrame'); }, 8000);
     </script>
 
 </template>
@@ -81,7 +89,15 @@
 <template name="dykTimeout">
     <script type="text/javascript">
         setTimeout(function(){
-            Session.set('currentFrame', 'dyk');
+            dice = Array('dyk','quoteFrame');
+            roll = dice[Math.floor(Math.random()*dice.length)];
+
+            while(Session.get('currentFrame') === roll) {
+                roll = dice[Math.floor(Math.random()*dice.length)];
+            }
+
+            Session.set('currentFrame', roll);
+
             randomBackground();
         }, 8000);
     </script>
@@ -91,8 +107,12 @@
 <template name="ttsCalloutTimeout">
     <script type="text/javascript">
         setTimeout(function(){
-            dice = Array('ttsCalloutLive','ttsCalloutBusinessLive');
+            dice = Array('ttsCalloutLive','ttsCalloutLive','quoteFrame','ttsCalloutBusinessLive');
             roll = dice[Math.floor(Math.random()*dice.length)];
+
+            while(Session.get('currentFrame') === roll) {
+                roll = dice[Math.floor(Math.random()*dice.length)];
+            }
 
             Session.set('currentFrame', roll);
         }, 8000);
