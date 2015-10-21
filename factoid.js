@@ -9,6 +9,11 @@ if (Meteor.isClient) {
     Session.setDefault('currentFrame', 'dyk');
   };
 
+  Template.demo.created = function(){
+    Session.setDefault('currentBackground', '1');
+    Session.setDefault('currentFrame', 'dyk');
+  };
+
   Template.registerHelper('currentFrame', function(){
     return Session.get('currentFrame');
   });
@@ -28,15 +33,21 @@ if (Meteor.isClient) {
                    'dataRecovery',
                    'dataRecovery',
                    'liquidDamage',
-                   'liquidDamage');
+                   'liquidDamage',
+                   'walkInService',
+                   'walkInService',
+                   'warranty',
+                   'warranty');
 
     frame = frames[Math.floor(Math.random()*frames.length)];
+
+    return 'liquidDamage';
     return frame;
   }
 
   var randomTTSCalloutBusiness = function() {
-    frame = 'businessQuip'+Math.floor((Math.random() * 7) + 1);
-    // frame = 'businessQuip3';
+    frame = 'businessQuip'+Math.floor((Math.random() * 9) + 1);
+    // frame = 'businessQuip9';
 
     return frame;
   }

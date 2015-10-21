@@ -4,8 +4,8 @@ Router.route('/', {
   template: 'kiosk'
 });
 
-Router.route('/test', {
-  template: 'testcase'
+Router.route('/demo', {
+  template: 'demo'
 });
 
 Router.route('/customer', {

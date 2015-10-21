@@ -30,6 +30,42 @@
 
 </template>
 
+<!-- DEMO MODE TEMPLATE -->
+<template name="demo">
+
+    <link rel="stylesheet" type="text/css" href="/css/frames.css">
+    <script type="text/javascript" src="/js/tendrils.js"></script>
+
+    <script type="text/javascript">
+        var randomBackground = function() {
+            bg = Math.floor((Math.random() * 5) + 1);
+
+            while(Session.get('currentBackground') === bg) {
+                bg = Math.floor((Math.random() * 5) + 1);
+            }
+
+            Session.set('currentBackground', bg);
+        }
+
+        setTimeout(function(){
+            exp_desktop();
+        }, 1000);
+    </script>
+
+    <style type="text/css">
+        html {
+            background: url('/images/bg/{{ currentBackground }}.jpg') no-repeat !important;
+            animation: panning 160s infinite linear;
+            -webkit-animation: panning 160s infinite linear;
+        }
+    </style>
+
+    <div style="height: 100%;">
+        {{> Template.dynamic template=currentFrame }}
+    </div>
+
+</template>
+
 
 <!-- scaffolding -->
 <template name="ttsCalloutLive">
@@ -131,10 +167,11 @@
     <style type="text/css">
         #callout {
             background: rgba(0, 0, 0, 0.2);
-            padding-top: 60px;
+            padding-top: 20px;
             padding-bottom: 20px;
             min-height: 50vh;
-
+            align-items: center;
+            display: flex;
         }
         #callout p {
             color: #fff;
@@ -199,9 +236,12 @@
     <style type="text/css">
         #quoteFrame {
             margin-top: 400px;
+            height: 1440px;
         }
 
         p.quote {
+/*            display: flex;
+            align-items: center;*/
             color: #f0f0f0;
             font-size: 74pt;
             font-family: serif;
@@ -230,7 +270,7 @@
             </div>
 
             <div class="row" style="position: relative">
-                <div id="ttslogo" class="col-sm-4 col-sm-offset-7 ttsfoot animated fadeInUp" style="position: fixed; bottom: 20px;">
+                <div id="ttslogo" class="col-sm-5 col-sm-offset-6 ttsfoot animated fadeInUp" style="position: fixed; bottom: 20px;">
                     <img src="/svg/ttslogo.svg" style="width:100%">
                 </div>
             </div>
@@ -305,16 +345,13 @@
                 effect: 'bounceIn',
                 shuffle: true,
                 delay: 15,
-            },
-            out: {
-                effect: 'fadeOut',
-            },
+            }
         });
 
         setTimeout(function(){
             $('#ttslogo').removeClass('fadeInDown').addClass('fadeOutUp');
             $('.repairs').addClass('animated fadeOutRight');
-            $('.delay').removeClass('zoomIn fadeInUp delay').addClass('nodelay flipOutX');
+            $('.delay:not(.noexit)').removeClass('zoomIn fadeInUp delay').addClass('nodelay flipOutX');
         }, 8000);
 
     </script>
@@ -498,8 +535,14 @@
 <template name="businessQuip9">
 
     <div class="row">
-        <div class="col-sm-12 animated zoomInUp delay repairs">
-            No Haggling: One Price for all, published on our web site - go ahead: compare!
+        <div class="col-sm-12 animated repairs" style="visibility: hidden;">
+            <p>UNPARALLELED EXPERTISE</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12 animated zoomInUp delay2 repairs">
+            Our certified technicians complete over 1,000 repairs every month
         </div>
     </div>
 
@@ -656,12 +699,12 @@
 
     <div class="row">
 
-        <div class="col-sm-4 animated fadeInUp delay">
+        <div class="col-sm-4 animated fadeInUp delay" style="margin-top: 100px">
             <img src="/images/devices/liquid.png" style="max-width: 700px;"><br>
             <span class="subtext">LIQUID DAMAGE</span>
         </div>
 
-        <div class="col-sm-8 animated zoomIn delay" style="">
+        <div class="col-sm-8 animated zoomIn delay" style="margin-top: 100px">
             <span class="subtext">Bad Spill?</span><br>
             <span class="subtext">Our Cleaning &amp; Repair Process</span><br>
             <span class="subtext">Has an 85% Success Rate</span>
@@ -669,4 +712,103 @@
 
     </div>
 
+</template>
+
+
+<!-- Walk-in -->
+<template name="walkInService">
+
+    <style type="text/css">
+        .delay, .nodelay {
+            text-align: center;
+            text-shadow: -4px 4px 4px rgba(0,0,0,0.5);
+        }
+
+        span.subtext {
+            font-size: 110pt;
+            color: #fff;
+            visibility: hidden;
+        }
+    </style>
+
+    <div class="row">
+
+        <div class="col-sm-10 col-sm-offset-1 animated zoomIn delay noExit" style="margin-top: 100px">
+            <span class="subtext">Walk-In Service</span><br>
+            <span class="subtext">No Appointment Needed!</span>
+        </div>
+
+    </div>
+    <script type="text/javascript">
+        setTimeout(function(){
+            $('span.subtext').textillate({
+                in: {
+                    effect: 'rotateIn',
+                    delay: 50,
+                    callback: function() {
+                        $('.delay').removeClass('delay').addClass('nodelay');
+
+                        setTimeout(function(){
+                            $('span.subtext').textillate('out');
+                        }, 2000);
+                    }
+                },
+
+                out: {
+                    shuffle: true,
+                    effect: 'fadeOutDownBig'
+                }
+            });
+        }, 1000);
+    </script>
+</template>
+
+
+<!-- Warranty -->
+<template name="warranty">
+
+    <style type="text/css">
+        .delay, .nodelay {
+            text-align: center;
+            text-shadow: -4px 4px 4px rgba(0,0,0,0.5);
+        }
+
+        span.subtext {
+            font-size: 110pt;
+            color: #fff;
+            visibility: hidden;
+        }
+    </style>
+
+    <div class="row">
+
+        <div class="col-sm-10 col-sm-offset-1 animated zoomIn delay noExit" style="margin-top: 100px">
+            <span class="subtext">ROCK-SOLID</span><br>
+            <span class="subtext">60 Day Warranty</span><br>
+            <span class="subtext">On All Repairs!</span>
+        </div>
+
+    </div>
+    <script type="text/javascript">
+        setTimeout(function(){
+            $('span.subtext').textillate({
+                in: {
+                    effect: 'rotateIn',
+                    delay: 50,
+                    callback: function() {
+                        $('.delay').removeClass('delay').addClass('nodelay');
+
+                        setTimeout(function(){
+                            $('span.subtext').textillate('out');
+                        }, 3000);
+                    }
+                },
+
+                out: {
+                    shuffle: true,
+                    effect: 'fadeOutDownBig'
+                }
+            });
+        }, 1000);
+    </script>
 </template>
