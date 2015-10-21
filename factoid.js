@@ -26,7 +26,14 @@ if (Meteor.isClient) {
   }
 
   var randomTTSCalloutBusiness = function() {
-    frame = 'businessQuip'+Math.floor((Math.random() * 2) + 1);
+    frame = 'businessQuip'+Math.floor((Math.random() * 7) + 1);
+
+    // while(Session.get('previousBusinessFrame') === frame) {
+    //   frame = 'businessQuip'+Math.floor((Math.random() * 7) + 1);
+    // }
+
+    // Session.set('previousBusinessFrame', frame);
+
     return frame;
   }
 

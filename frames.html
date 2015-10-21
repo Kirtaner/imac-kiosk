@@ -1,3 +1,36 @@
+<!-- MAIN TEMPLATE -->
+<template name="kiosk">
+
+    <link rel="stylesheet" type="text/css" href="/css/frames.css">
+    <script type="text/javascript" src="/js/tendrils.js"></script>
+
+    <script type="text/javascript">
+        var randomBackground = function() {
+            bg = Math.floor((Math.random() * 6) + 1);
+
+            while(Session.get('currentBackground') === bg) {
+                bg = Math.floor((Math.random() * 6) + 1);
+            }
+
+            Session.set('currentBackground', bg);
+        }
+    </script>
+
+    <style type="text/css">
+        html {
+            background: url('/images/bg/{{ currentBackground }}.jpg') no-repeat !important;
+            animation: panning 160s infinite linear;
+            -webkit-animation: panning 160s infinite linear;
+        }
+    </style>
+
+    <div style="height: 100%;">
+        {{> Template.dynamic template=currentFrame }}
+    </div>
+
+</template>
+
+
 <!-- scaffolding -->
 <template name="ttsCalloutLive">
     {{ > ttsCallout }}
@@ -7,6 +40,85 @@
 <template name="ttsCalloutBusinessLive">
     {{ > ttsCalloutBusiness }}
     {{ > dykTimeout }}
+</template>
+
+
+<!-- frame changers -->
+<template name="dykTimeout">
+    <script type="text/javascript">
+        setTimeout(function(){
+            dice = Array('dyk','quoteFrame');
+            roll = dice[Math.floor(Math.random()*dice.length)];
+
+            while(Session.get('currentFrame') === roll) {
+                roll = dice[Math.floor(Math.random()*dice.length)];
+            }
+
+            Session.set('currentFrame', roll);
+
+            randomBackground();
+        }, 10000);
+    </script>
+</template>
+
+
+<template name="ttsCalloutTimeout">
+    <script type="text/javascript">
+        setTimeout(function(){
+            dice = Array('ttsCalloutLive','quoteFrame','ttsCalloutBusinessLive');
+            roll = dice[Math.floor(Math.random()*dice.length)];
+
+            while(Session.get('currentFrame') === roll) {
+                roll = dice[Math.floor(Math.random()*dice.length)];
+            }
+
+            Session.set('currentFrame', roll);
+        }, 10000);
+    </script>
+</template>
+
+
+<!-- DID YOU KNOW frame -->
+<template name="dyk">
+    <style type="text/css">
+        #dyktext {
+            font-size: 13em;
+            color: white !important;
+            font-family: proxima_nova_rgbold;
+            position: absolute;
+            left: 590px;
+            top: 560px;
+        }
+    </style>
+
+    <div id="container">
+        <div style="margin-left: 10em; margin-top: 16em;">
+            <div id="dykimg" style="position: relative;">
+                <img class="ttshead" src="/svg/dyk3.svg" style="position: absolute; height: 700px; z-index: 2">
+                <img class="qmarks" src="/svg/dyk4.svg" style="position: absolute; height: 600px; left: 500px">
+            </div>
+
+            <div id="dyktext"
+                 data-in-sequence="true"
+                 data-in-effect="flip"
+                 style="visibility: hidden;">DID YOU KNOW?</div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        setTimeout(function(){
+            $('#dyktext').textillate({
+            });
+        }, 1500);
+
+        setTimeout(function(){
+            $('#dykimg img').addClass('exit');
+            $('#dyktext').addClass('exit');
+        }, 6000);
+
+        setTimeout(function(){ Session.set('currentFrame', 'factoidFrame'); }, 8000);
+    </script>
+
 </template>
 
 
@@ -33,12 +145,15 @@
         span.gold {
             color: gold;
         }
+        p.factoid {
+            visibility: hidden;
+        }
     </style>
 
     <div id="fact">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-sm-12 calloutFact" id="callout">
+                <div class="col-sm-12 calloutFact animated fadeInDown" id="callout">
                     <div class="col-sm-10 col-sm-offset-1">
                         {{> Template.dynamic template=currentFactoid}}
                     </div>
@@ -54,12 +169,20 @@
     </div>
 
     <script type="text/javascript">
-        $('p.factoid').textillate({
-            in: {
-                effect: 'flipInY',
-                delay: 25
-            }
-        });
+        setTimeout(function(){
+            $('p.factoid').textillate({
+                in: {
+                    effect: 'flipInY',
+                    delay: 15
+                }
+            });
+        }, 1000);
+
+        setTimeout(function(){
+            $('#callout').removeClass('fadeInDown').addClass('fadeOutUp');
+            $('.ttsfoot').removeClass('fadeInUp').addClass('fadeOutRight');
+        }, 8000);
+
     </script>
 
     {{ > ttsCalloutTimeout }}
@@ -80,6 +203,7 @@
             font-size: 74pt;
             font-family: serif;
             text-shadow: -4px 4px 4px rgba(0,0,0,0.5);
+            visibility: hidden;
         }
 
         p.attr {
@@ -97,13 +221,13 @@
     <div id="fact">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-sm-10 col-sm-offset-1" id="quoteFrame">
+                <div class="col-sm-10 col-sm-offset-1 animated" id="quoteFrame">
                     {{> Template.dynamic template=currentQuote }}
                 </div>
             </div>
 
             <div class="row" style="position: relative">
-                <div class="col-sm-4 col-sm-offset-7 ttsfoot" style="position: fixed; bottom: 20px;">
+                <div id="ttslogo" class="col-sm-4 col-sm-offset-7 ttsfoot animated fadeInUp" style="position: fixed; bottom: 20px;">
                     <img src="/svg/ttslogo.svg" style="width:100%">
                 </div>
             </div>
@@ -112,13 +236,20 @@
 
     <script type="text/javascript">
         $('p.quote').textillate({
-            // initialDelay: 800,
 
             in: {
                 effect: 'fadeIn',
                 delay: 25,
             }
         });
+    </script>
+
+    <script type="text/javascript">
+        setTimeout(function(){
+            $('#ttslogo').removeClass('fadeInUp').addClass('fadeOutRight');
+            $('#quoteFrame').addClass('fadeOut');
+        }, 8000);
+
     </script>
 
     {{ > ttsCalloutTimeout }}
@@ -144,7 +275,7 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-12 animate animated fadeInDown" style="margin-top: 20px">
+            <div id="ttslogo" class="col-sm-12 animated fadeInDown" style="margin-top: 20px">
                 <img src="/svg/ttslogo.svg" style="width:100%">
             </div>
         </div>
@@ -155,10 +286,12 @@
             </div>
         </div>
 
-        <!-- {{> Template.dynamic template=ttsCalloutRandom }} -->
+        {{> Template.dynamic template=ttsCalloutRandom }}
         <!-- {{ > consoles }} -->
-        {{ > apple }}
+        <!-- {{ > apple }} -->
         <!-- {{ > samsungServiceCentre }} -->
+        <!-- {{ > dataRecovery }} -->
+
     </div>
 
     <script type="text/javascript">
@@ -174,6 +307,13 @@
                 effect: 'fadeOut',
             },
         });
+
+        setTimeout(function(){
+            $('#ttslogo').removeClass('fadeInDown').addClass('fadeOutUp');
+            $('.repairs').addClass('animated fadeOutRight');
+            $('.delay').removeClass('zoomIn fadeInUp delay').addClass('nodelay flipOutX');
+        }, 8000);
+
     </script>
 
 </template>
@@ -193,11 +333,14 @@
             font-weight: bold;
             text-shadow: -4px 4px 4px rgba(0,0,0,0.5);
         }
+        span.gold {
+            color: gold;
+        }
     </style>
 
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-12 animate animated fadeInDown" style="margin-top: 20px">
+            <div id="ttslogo" class="col-sm-12 animated fadeInDown" style="margin-top: 20px">
                 <img src="/svg/ttslogo.svg" style="width:100%">
             </div>
         </div>
@@ -220,20 +363,27 @@
         });
     </script>
 
+    <script type="text/javascript">
+        setTimeout(function(){
+            $('#ttslogo').removeClass('fadeInDown').addClass('fadeOutUp');
+            $('.repairs').removeClass('zoomInUp fadeInUp delay delay2').addClass('flipOutX');
+        }, 8000);
+    </script>
+
 </template>
 
 <!-- Business callout quips -->
 <template name="businessQuip1">
 
     <div class="row">
-        <div class="col-sm-12 repairs" style="visibility: hidden;">
+        <div class="col-sm-12 animated repairs" style="visibility: hidden;">
             <p>HELP KEEP YOUR STAFF PRODUCTIVE</p>
         </div>
     </div>
 
     <div class="row">
         <div class="col-sm-12 animated zoomInUp delay2 repairs" style="font-size: 64pt">
-            Downtime kills productivity and shrinks your bottom line<br><br>
+            <span class="gold">Downtime kills productivity and shrinks your bottom line</span><br><br>
             Empower your business by partnering with<br>
             The TechKnow Space
         </div>
@@ -244,7 +394,7 @@
 <template name="businessQuip2">
 
     <div class="row">
-        <div class="col-sm-12 repairs" style="visibility: hidden;">
+        <div class="col-sm-12 animated repairs" style="visibility: hidden;">
             <p>HELP KEEP YOUR STAFF PRODUCTIVE</p>
         </div>
     </div>
@@ -261,7 +411,7 @@
 <template name="businessQuip3">
 
     <div class="row">
-        <div class="col-sm-12 repairs" style="visibility: hidden;">
+        <div class="col-sm-12 animated repairs" style="visibility: hidden;">
             <p>HELP KEEP YOUR STAFF PRODUCTIVE</p>
         </div>
     </div>
@@ -273,6 +423,62 @@
     </div>
 
 </template>
+
+<template name="businessQuip4">
+
+    <div class="row">
+        <div class="col-sm-12 animated zoomInUp delay repairs">
+            When your technology devices hiccup, your cost in downtime can be much higher than you think.
+            Estimates range from <span class="gold">$2,000</span> to a crazy-high <span class="gold">$8,000</span> per failure!
+        </div>
+    </div>
+
+</template>
+
+<template name="businessQuip5">
+
+    <div class="row">
+        <div class="col-sm-12 animated repairs" style="visibility: hidden;">
+            <p>SAVING YOU TIME AND MONEY</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12 animated zoomInUp delay2 repairs">
+            Repairs completed under accidental damage warranties can cost up to <span class="gold">3 times more per device</span> than a TechKnow Space Solution.
+        </div>
+    </div>
+
+</template>
+
+
+<template name="businessQuip6">
+
+    <div class="row">
+        <div class="col-sm-12 animated repairs" style="visibility: hidden;">
+            <p>ETHICAL BUSINESS PRACTICES</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12 animated zoomInUp delay2 repairs">
+            Ask the <span class="gold">Better Business Bureau</span> - We have consistently maintained BBB's highest rating.
+        </div>
+    </div>
+
+</template>
+
+
+<template name="businessQuip7">
+
+    <div class="row">
+        <div class="col-sm-12 animated zoomInUp delay repairs">
+            Broken or failed mobile tools and technology can cost you dearly, impairing your business operations &amp; competitiveness, and taking a toll on your profitability.
+        </div>
+    </div>
+
+</template>
+
 
 <!-- SAMSUNG -->
 <template name="samsungServiceCentre">
@@ -296,7 +502,7 @@
 <!-- CONSOLES -->
 <template name="consoles">
     <style type="text/css">
-        .delay {
+        .delay, .nodelay {
             text-align: center;
             text-shadow: -4px 4px 4px rgba(0,0,0,0.5);
         }
@@ -332,7 +538,7 @@
 <template name="apple">
 
     <style type="text/css">
-        .delay {
+        .delay, .nodelay {
             text-align: center;
             text-shadow: -4px 4px 4px rgba(0,0,0,0.5);
         }
@@ -347,16 +553,50 @@
 
         <div class="col-sm-4 animated fadeInUp delay">
             <img src="/images/devices/iphones.png" style="max-height: 480px;"><br>
-            <span class="subtext">1 HOUR</span>
+
+            <span class="subtext">PHONES<br>1 HOUR</span>
         </div>
         <div class="col-sm-4 animated fadeInUp delay">
             <img src="/images/devices/ipads.png" style="max-height: 480px;"><br>
-            <span class="subtext">2 HOURS</span>
+            <span class="subtext">TABLETS<br>2 HOURS</span>
         </div>
         <div class="col-sm-4 animated fadeInUp delay">
             <img src="/images/devices/macbook.png" style="max-height: 480px;"><br>
-            <span class="subtext">1 DAY</span>
+            <span class="subtext">LAPTOPS<br>1 DAY</span>
         </div>
+    </div>
+
+
+</template>
+
+
+<!-- Data Recovery -->
+<template name="dataRecovery">
+
+    <style type="text/css">
+        .delay, .nodelay {
+            text-align: center;
+            text-shadow: -4px 4px 4px rgba(0,0,0,0.5);
+        }
+
+        span.subtext {
+            font-size: 72pt;
+            color: #fff;
+        }
+    </style>
+
+    <div class="row">
+
+        <div class="col-sm-4 animated fadeInUp delay">
+            <img src="/images/devices/hdd.png" style="max-height: 520px;"><br>
+
+            <span class="subtext">DATA RECOVERY</span>
+        </div>
+        <div class="col-sm-8 animated zoomIn delay" style="margin-top: 150px;">
+            <span class="subtext">Get Your Lost or Deleted</span><br>
+            <span class="subtext">Documents, Photos &amp; Videos Back!</span>
+        </div>
+
     </div>
 
 </template>
