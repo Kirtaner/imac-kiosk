@@ -6,10 +6,10 @@
 
     <script type="text/javascript">
         var randomBackground = function() {
-            bg = Math.floor((Math.random() * 6) + 1);
+            bg = Math.floor((Math.random() * 5) + 1);
 
             while(Session.get('currentBackground') === bg) {
-                bg = Math.floor((Math.random() * 6) + 1);
+                bg = Math.floor((Math.random() * 5) + 1);
             }
 
             Session.set('currentBackground', bg);
@@ -108,15 +108,18 @@
     <script type="text/javascript">
         setTimeout(function(){
             $('#dyktext').textillate({
+                in: {
+                    delay: 40
+                }
             });
-        }, 1500);
+        }, 1000);
 
         setTimeout(function(){
             $('#dykimg img').addClass('exit');
             $('#dyktext').addClass('exit');
-        }, 6000);
+        }, 4000);
 
-        setTimeout(function(){ Session.set('currentFrame', 'factoidFrame'); }, 8000);
+        setTimeout(function(){ Session.set('currentFrame', 'factoidFrame'); }, 4800);
     </script>
 
 </template>
@@ -418,7 +421,8 @@
 
     <div class="row">
         <div class="col-sm-12 animated zoomInUp delay2 repairs">
-            Our Mission: Delivering business agility to help you lift that all important bottom line smile
+            Our Mission: Delivering business agility to help you lift that all important bottom line
+            <br>😃
         </div>
     </div>
 
@@ -474,6 +478,39 @@
     <div class="row">
         <div class="col-sm-12 animated zoomInUp delay repairs">
             Broken or failed mobile tools and technology can cost you dearly, impairing your business operations &amp; competitiveness, and taking a toll on your profitability.
+        </div>
+    </div>
+
+</template>
+
+
+<template name="businessQuip8">
+
+    <div class="row">
+        <div class="col-sm-12 animated zoomInUp delay repairs">
+            TechKnow Space delivers fast repair solutions to your business so your staff can go about their tasks in pursuit of corporate goals.
+        </div>
+    </div>
+
+</template>
+
+
+<template name="businessQuip9">
+
+    <div class="row">
+        <div class="col-sm-12 animated zoomInUp delay repairs">
+            No Haggling: One Price for all, published on our web site - go ahead: compare!
+        </div>
+    </div>
+
+</template>
+
+
+<template name="businessQuip10">
+
+    <div class="row">
+        <div class="col-sm-12 animated zoomInUp delay repairs">
+            Experience: Over a hundred and fifty thousand devices repaired in 10 years...
         </div>
     </div>
 
@@ -595,6 +632,39 @@
         <div class="col-sm-8 animated zoomIn delay" style="margin-top: 150px;">
             <span class="subtext">Get Your Lost or Deleted</span><br>
             <span class="subtext">Documents, Photos &amp; Videos Back!</span>
+        </div>
+
+    </div>
+
+</template>
+
+
+<!-- Liquid Damage -->
+<template name="liquidDamage">
+
+    <style type="text/css">
+        .delay, .nodelay {
+            text-align: center;
+            text-shadow: -4px 4px 4px rgba(0,0,0,0.5);
+        }
+
+        span.subtext {
+            font-size: 72pt;
+            color: #fff;
+        }
+    </style>
+
+    <div class="row">
+
+        <div class="col-sm-4 animated fadeInUp delay">
+            <img src="/images/devices/liquid.png" style="max-width: 700px;"><br>
+            <span class="subtext">LIQUID DAMAGE</span>
+        </div>
+
+        <div class="col-sm-8 animated zoomIn delay" style="">
+            <span class="subtext">Bad Spill?</span><br>
+            <span class="subtext">Our Cleaning &amp; Repair Process</span><br>
+            <span class="subtext">Has an 85% Success Rate</span>
         </div>
 
     </div>

@@ -20,19 +20,23 @@ if (Meteor.isClient) {
   /* TTS Callout frame helpers */
 
   var randomTTSCallout = function() {
-    frames = Array('consoles','samsungServiceCentre','apple');
+    frames = Array('consoles',
+                   'samsungServiceCentre',
+                   'samsungServiceCentre',
+                   'apple',
+                   'apple',
+                   'dataRecovery',
+                   'dataRecovery',
+                   'liquidDamage',
+                   'liquidDamage');
+
     frame = frames[Math.floor(Math.random()*frames.length)];
     return frame;
   }
 
   var randomTTSCalloutBusiness = function() {
     frame = 'businessQuip'+Math.floor((Math.random() * 7) + 1);
-
-    // while(Session.get('previousBusinessFrame') === frame) {
-    //   frame = 'businessQuip'+Math.floor((Math.random() * 7) + 1);
-    // }
-
-    // Session.set('previousBusinessFrame', frame);
+    // frame = 'businessQuip3';
 
     return frame;
   }

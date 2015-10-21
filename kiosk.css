@@ -63,21 +63,21 @@ a {
 /* DYK */
 
 .ttshead {
-  -webkit-animation: rotateInDownLeft 2s;
+  -webkit-animation: rotateInDownLeft 1s;
 }
 
 .ttshead.exit{
-  -webkit-animation: fadeOutLeft 2s;
+  -webkit-animation: fadeOutLeft 1s;
 }
 
 .qmarks {
-  -webkit-animation: fadeInRight 2s;
+  -webkit-animation: fadeInRight 1s;
 }
 
 .qmarks.exit{
-  -webkit-animation: fadeOutRight 2s;
+  -webkit-animation: fadeOutRight 1s;
 }
 
 #dyktext.exit{
-  -webkit-animation: fadeOutDown 2s;
+  -webkit-animation: fadeOutDown 1s;
 }
