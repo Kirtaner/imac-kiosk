@@ -16,6 +16,10 @@ Router.route('/list', {
   template: 'customerList'
 });
 
+Router.route('/policy', {
+  template: 'policies'
+});
+
 Router.route('/build', {
   template: 'build'
 });

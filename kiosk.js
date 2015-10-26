@@ -116,15 +116,26 @@ if (Meteor.isClient) {
     };
   });
 
+  Template.registerHelper('policyPane', function(){
+    return Session.get('policyPane');
+  });
+
   showSuccessModal = function(){
     id = Session.get('lastId');
 
     Customers.update(id, {$set: {confirmed: true}}, {validate: false});
 
-    Modal.hide();
+    Modal.hide('confirmationModal');
 
-    setTimeout(function(){ Modal.show('successModal'); }, 500);
-    setTimeout(function(){ Modal.hide('successModal'); }, 5000);
+    setTimeout(function(){
+      Modal.show('successModal');
+      setTimeout(function(){
+        Modal.hide('successModal');
+        setTimeout(function(){
+          $('.modal, .modal-backdrop').remove();
+        }, 500);
+      }, 2000);
+    }, 500);
   }
 
   Template.customerList.helpers({
@@ -170,7 +181,6 @@ if (Meteor.isClient) {
 
   function modalTimeout(){
     clearTimeout(idleModal);
-    // Modal.show('customerFormModal');
     idleModal = setTimeout(function(){ Modal.hide('customerFormModal'); }, 30000);
   }
 

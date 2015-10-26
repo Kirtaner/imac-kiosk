@@ -27,17 +27,12 @@ if (Meteor.isClient) {
   var randomTTSCallout = function() {
     frames = Array('consoles',
                    'samsungServiceCentre',
-                   'samsungServiceCentre',
-                   'apple',
                    'apple',
                    'dataRecovery',
-                   'dataRecovery',
-                   'liquidDamage',
                    'liquidDamage',
                    'walkInService',
-                   'walkInService',
-                   'warranty',
-                   'warranty');
+                   'warranty'
+                  );
 
     frame = frames[Math.floor(Math.random()*frames.length)];
 

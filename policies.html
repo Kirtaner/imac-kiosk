@@ -1,0 +1,312 @@
+<template name="policyModal">
+
+    <div class="modal fade">
+        {{ > policies }}
+    </div>
+
+</template>
+
+
+<template name="policies">
+
+    <style type="text/css">
+        #policies {
+            font-family: "Helvetica Neue";
+            font-size: 1.3em;
+        }
+        .policy {
+            background: #fff;
+            color: #000;
+        }
+    </style>
+
+    <div id="policies">
+        <div class="container-fluid">
+            <div class="row">
+
+                <div class="col-sm-3 col-sm-offset-1">
+                    <div class="list-group">
+                        {{ > policyIndex }}
+                    </div>
+                </div>
+
+                <div class="col-sm-7 policy">
+                    {{#Animate}}
+                        {{ > Template.dynamic template=policyPane }}
+                    {{/Animate}}
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $('.list-group a').on('click', function(){
+            var pane = $(this).data('pane');
+            Session.set('policyPane', pane);
+        });
+    </script>
+
+</template>
+
+
+<template name="policyIndex">
+
+    <a href="#" data-pane="buyingParts" class="list-group-item">Buying Parts vs Buying a Solution</a>
+    <a href="#" data-pane="diagnosticFees" class="list-group-item">Diagnostics Process and Fees</a>
+    <a href="#" data-pane="payTax" class="list-group-item">Do I Have to Pay Tax?</a>
+    <a href="#" data-pane="employmentOpportunities" class="list-group-item">Employment Opportunities</a>
+    <a href="#" data-pane="glassVsScreen" class="list-group-item">Glass vs Screen Assembly</a>
+    <a href="#" data-pane="guidingPrinciples" class="list-group-item">Guiding Principles</a>
+    <a href="#" data-pane="howDoIPay" class="list-group-item">How Do I Pay</a>
+    <a href="#" data-pane="liability" class="list-group-item">Limitation of Liability</a>
+    <a href="#" data-pane="liquidDamagePolicy" class="list-group-item">Liquid Damage Processes and Fees</a>
+    <a href="#" data-pane="mailInstructions" class="list-group-item">Mail-In Instructions</a>
+    <a href="#" data-pane="mfgWarranty" class="list-group-item">Manufacturer Warranty VS Our Solution</a>
+    <a href="#" data-pane="sustainableEcosystem" class="list-group-item">Our Sustainable Ecosystem</a>
+    <a href="#" data-pane="passwordPolicy" class="list-group-item">Password Policy</a>
+    <a href="#" data-pane="privacyPolicy" class="list-group-item">Privacy Policy</a>
+    <a href="#" data-pane="repairPolicy" class="list-group-item">Repair Policy</a>
+    <a href="#" data-pane="repairVsReplace" class="list-group-item">Repair VS Replace</a>
+    <a href="#" data-pane="riskVsReward" class="list-group-item">Risk vs Reward - Bringing Your Own Parts To Us</a>
+    <a href="#" data-pane="storePolicy" class="list-group-item">Store Policies</a>
+    <a href="#" data-pane="warrantyPolicy" class="list-group-item">Warranty Policy</a>
+    <a href="#" data-pane="whyChooseUs" class="list-group-item">Why Choose Us</a>
+    <a href="#" data-pane="whyTrustUs" class="list-group-item">Why Trust Us</a>
+
+</template>
+
+
+<template name="diagnosticFees">
+
+    <h1>Diagnostics Process and Fees</h1>
+
+    <p>THERE IS NO DIAGNOSTICS CHARGE WHEN WE COMPLETE YOUR REPAIRS. WE SIMPLY CHARGE YOU FOR THE REPAIRS.<br>
+    THERE IS A DIAGNOSTICS CHARGE WHEN YOU DECLINE OUR REPAIR ESTIMATES. WE SIMPLY CHARGE YOU FOR THE DIAGNOSTICS.<br>
+    Diagnostics fees are charged when the customer declines to proceed with the repair -- typically when our estimate for the cost of repairs exceeds the economic value of the device.</p>
+
+    <p>You either pay for the repair charges approved by you, or our diagnostics fee. Diagnostics fees are waived if we complete the approved repair.</p>
+
+    <p>Final charges are either:</p>
+
+    <p>For repairs completed<br>
+    (diagnostics fees do not apply, repair charges do apply)</p>
+
+    <p>OR</p>
+
+    <p>For diagnosis efforts<br>
+    (when no repair is peformed, diagnostics fees apply)</p>
+
+    <p>We will not charge you both Repair Cost and Diagnostics Fee for the same device on the same work order.</p>
+
+    <p>
+    Diagnostic Fees:</p>
+
+    <p>Desktop Computers, Laptops, Macbooks:.....................................$40.00<br>
+    Gaming Consoles:.............................................................................$40.00<br>
+    All other Handheld Devices:............................................................$25.00</p>
+
+    <p>Repair Approval Limit:</p>
+
+    <p>Upon completion of diagnostics, if the repair cost does not exceed $79.95 (before tax) we will proceed with the repairs without providing an estimate or seeking further approval. If our estimate exceeds $79.95, we will call you, and provide our estimate for your approval before proceeding with the repair.</p>
+
+    <p>
+    Liquid Damage Fees:</p>
+
+    <p>Liquid Damage Cleaning Fee:</p>
+
+    <p>Phone's &amp; Tablets........................................................$40.00<br>
+    Gaming Systems...........................................................$40.00<br>
+    Desktop Computers, Laptops, Macbooks.................$60.00</p>
+
+    <p>Liquid damage device cleaning is not classified as a repair and the Liquid Damage Cleaning Fee is not a repair charge. A liquid damage cleaning fee may accompany a dignostics fee should a repair estimate be declined.</p>
+
+    <p>Devices which are restored to functionality as a result of liquid damage cleaning are not classified as being repaired.</p>
+</template>
+
+
+<template name="liquidDamagePolicy">
+
+    <h2>Liquid Damage Processes and Fees</h2>
+
+All digital devices, phones, laptops, tablets, etc are liquid-phobic. Depending on the extent of the liquid exposure, these devices are often beyond repairing.
+
+Devices commonly go through a washing cycle, get dropped in swimming pools, toilet bowls, bath tubs, or snow, and get quenched with water, milk, juice, coffee, beer, suntan lotions, etc.
+
+The one thing you should not do is turn it on, while the one thing that you should do is to bring/send the device in to us, at The TechKnow Space, ASAP.
+
+Most typically, after a bout with the pernicious liquids, the first human response is to see if the device is alive by powering it up. This damages the device since the battery power heats up the circuits and dissipates and flushes the liquids through the devices. The more frequently the device is powered on, or the longer it stays powered on, the less likely it is to be saved.
+
+What's the big deal about liquid-damaged devices?
+
+Warrantys and Extended Warrantys do not offer coverage or provide protection
+Accidental Warrantys typically allow for swapping the liquid-damaged device with a new or refurbished device. Worse, these Accidental Warrantys cost between $200 to $300 per year, plus a deductible of $100 to $300 for the replacement device. frown
+In both these situations, you have lost all your data....ouch cry
+The TechKnow Space will bring smiles to your wet and weeping devices:
+
+Save 80% of your devices (phones/laptops, tablets, etc)within 2 to 10 hours embarassed
+The cost will range typically between $40 and $150
+Once the device ia alive, you typically have:
+All your data (calendar, emails, contacts, pictures, music, etc) smile
+All your applications tongue-out
+All your configurations set to your preferences and comfort settings wink
+ ANALYSIS PROCESS
+Our Easy Liquid Damage Repair Process.  You pay cleaning fee in advance & we start the cleaning process.  Can corrosion be cleaned? If not we do not proceed, device is not econimically repairable. If yes we determine whether a repair is needed.  If no repairs needed, you pick up your working device with no further charges owing.  If repairs are needed we procide an estaimate for your approval.  If you decline the estimate, you pick up your un-repaired device and no further charges are owing. If you approve the estimate we go ahead with the repair, you pick up your repaired device and pay the repair charges.
+
+Initially, all devices typically seem to work with one or two functions impaired or lost. Most customers call us asking us to repair that failed function/s, since the device seems to otherwise work.
+
+We have to then spend time explaining to them that liquid-damaged devices exhibit a behavior that can be described as a “cascading” failure, beginning with a failure of one function, and over time, having other functions start to fail.
+
+We explain how, depending on the extent of liquid exposure, repairs are often futile and a waste of money, unless we can ascertain the extent of the damage and go through a damage diagnostics process as follows:
+
+We thoroughly clean each component in the device to remove all traces of  moisture and humidity. This process takes about an hour of work, completed over one day.
+If we are satisfied that the moisture has been completely removed, we then complete a diagnostics to ascertain the functionality and the repairs needed.
+We then call you to let you know the problems identified and the cost of repairs. Upon getting  your authorization, we complete the repairs within a few hours.
+Despite our judgment that the device can probably be saved, we offer no warranties for repairs done, since liquid-damaged devices are subject to unpredictable failures.
+Depending on the extent of liquid damage, and only you know this best, the probability of saving your devices is typically 75+ percent.
+If your device has experienced significant liquid-damage (dropped in swimming pool for more than a couple of minutes, experienced a wash cycle, etc), we suggest you abandon and buy a replacement device. If liquid exposure is less severe (typically less than 30 seconds), it would make sense to bring/send it in.
+If your device cannot be saved (when moisture has damaged the main board or the brain of your device), we call and advise you as such. We do not suggest replacing main logic boards since this can be exhorbitantly expensive, and we certainly encourage you to replace the device with a new one.
+ MANAGING EXPECTATIONS
+Managing expectations is a key component of any relationship, which is the goal of this communication. Rather than sending us your favorite device from Vancouver or even driving all the way to our downtown store, we would hope you use this page to ascertain the risks and proceed accordingly.
+
+Customers may or may not be aware of liquid damage to their device(s).
+
+Customers Who Are Aware of Liquid Damage
+
+We charge an upfront non-refundable cleaning fee for all liquid damaged devices as follows:
+Handheld Devices:     $40.00
+Laptops/Macbooks:   $60.00
+
+Upon completion of cleaning, if we conclude that the moisture has been sufficiently cleaned from your mainboard for your device to have a reasonable chance for survival, we will call you with our estimate for the actual repairs.If approved, we will proceed with the repairs. The total charge to you will be the up-front charge for cleaning plus the cost of repairs approved by you.  If the device is not repairable or not cost effective to repair we will return the device to you with no further charge.
+
+Customers Unaware of Liquid Damage
+
+If we discover during the course of diagnosis or repair that the device has experienced liquid damage, we will stop the diagnostics and call to advise you about the additional cleaning charge. If you approve, we proceed with the cleaning. Upon completion of cleaning, if we conclude that the moisture has been sufficiently cleaned from your mainboard for your device to have a reasonable chance for survival, we will call you with our estimate for the actual repairs. If approved, we will proceed with the repairs. The total charge to you will be the cleaning charge plus the cost of repairs approved by you.  If the moisture has not been adequately removed, we re-assemble the device and call to advise you to pick up (or return ship) your device. The cleaning fee will be due.
+
+We do look forward to helping you save and repair your devices.
+
+</template>
+
+<template name="liability">
+
+Under no circumstances will any requests for compensation be considered due to circumstances including (but not limited to):
+
+Time it takes you to make additional visit(s) to avail of your warranty coverage.
+Loss of data, photos, videos, music, settings, apps, or personal configuration.
+Unavailability of our service.
+Delays in service or repair turnaround times.
+Unavailability of parts.
+Delays in receiving parts.
+Any expenses incurred by you relating to the failure and repair of your device.
+The TechKnow Space Inc. (TechKnow Space) warrants to the original purchaser (“Purchaser”) that
+Laptop Batteries & chargers and phone batteries (“Products”) are free from defects in material and
+workmanship under normal use and service for the period commencing upon the date of
+purchase and continuing for the following specified period of time after that date:
+
+What is Not Covered? This Limited Warranty is subject to proper use of
+Product by Purchaser. This Limited Warranty does not cover: (a) defects or damage
+resulting from accident, misuse, abuse, neglect, unusual physical, electrical or
+electromechanical stress, or modification of any part of Product, including antenna, or
+cosmetic damage; (b) equipment that has the serial number removed or made illegible;
+(c) any plastic surfaces or other externally exposed parts that are scratched r damaged due
+to normal use; (d) malfunctions resulting from the use of Product in conjunction with
+accessories, products, or ancillary/peripheral equipment not furnished or approved by
+the manufacturer; (e) defects or damage from improper testing, operation, maintenance,
+installation, or adjustment; (f) installation, maintenance, and service of Product, or (g)
+Product used or purchased outside the United States or Canada.
+This Limited Warranty does not cover any battery if (i)
+the battery has been charged by a battery charger not specified or approved by
+the manufacturer for charging the battery, (ii) any of the seals on the battery are broken or
+show evidence of tampering, or (iii) the battery has been used in equipment other than the
+device for which it is specified.
+
+
+What are TechKnow Space’s Obligations? During the applicable warranty period,
+TehKnow Space will repair or replace, at TechKnow Space’s sole options, without charge to
+Purchase, any defective component part of Product. To obtain service under this Limited
+Warranty, Purchaser must return Product to a TechKnow Space location in an
+adequate container for shipping, accompanied by Purchaser’s sales receipt.
+
+Upon receipt, TechKnow Space will promptly
+repair or replace the defective Product. TechKnow Space may, at TechKnow Space’s sole options,
+use rebuilt, reconditioned, or new parts or components when repairing any Product or
+replace Product with a rebuilt, reconditioned or new Product.  All
+repaired/replaced Product will be warranted for a period equal to the remainder of the
+original Limited Warranty on the original Product. All replaced parts, components, boards and equipment shall become the property of
+TechKnow Space. If TechKnow Space determines that any Product is not covered by this Limited
+Warranty, Purchaser must pay all parts, shipping, and labor charges for the repair or
+return of such Product.
+
+
+What Are the Limits On TechKnow Space’s Liability? EXCEPT AS SET FORTH IN THE
+EXPRESS WARRANTY CONTAINED HEREIN. PURCHASER TAKES TE
+PRODUCT “AS IS,” AND TechKnow Space MAKES NO WARRANTY OR
+REPRESENTATION AND THERE ARE NO CONDITIONS, EXPRESS OR IMPLIED,
+STATUTORY OR OTHERWISE, OF ANY KIND WHATSOEVER WITH RESPECT
+TO THE PRODUCT, INCLUDING BUT NOT LIMITED TO:
+• THE MERCHANTABILITY OF THE PRODUCT OR ITS FITNESS FOR ANY
+PARTICULAR PURPOSE OR USE;
+• WARRANTIES OF TITLE OR NON-INFRINGEMENT;
+• DESIGN, CONDITION, QUALITY, OR PERFORMANCE OF THE PRODUCT;
+• THE WORKMANSHIP OF THE PRODUCT OR THE COMPONENTS
+CONTAINED THEREIN; OR
+• COMPLIANCE OF THE PRODUCT WITH THE REQUIREMENTS OF ANY
+LAW, RULE, SPECIFICATION OR CONTRACT PERTAINING THERETO.
+NOTHING CONTAINED IN THE INSTRUCTION MANUAL SHALL BE
+CONSTRUED TO CREATE AN EXPRESS WARRANTY OF ANY KIND
+WHATSOEVER WITH RESPECT TO THE PRODUCT. ALL IMPLIED
+WARRANTIES AND CONDITIONS THAT MAY ARISE BY OPERAITON OF LAW,
+INCLUDING IF APPLICABLE THE IMPLIED WARRANTIES OF
+MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE, ARE
+HEREBY LIMITED TO THE SAME DURATION OF TIME AS THE EXPRESS
+WRITTEN WARRANTY STATED HEREIN.IN ADDITION,
+
+TechKnow Space SHALL NOT BE LIABLE FOR ANY DAMAGES OF ANY KIND
+RESULTING FROM THE PURCAHSE, USE, OR MISUSE OF, OR INABILITY TO
+USE THE PRODUCT OR ARISING DIRECTLY OR INDIRECTLY FROM THE USE
+OR LOSS OF USE OF THE PRODUCT OR FROM THE BREACH OF THE EXPRESS
+WARRANTY, INCLUDING INCIDENTAL, SPECIAL, CONSEQUENTIAL OR
+SIMILAR DAMAGES, OR LOSS OF ANTICIPATED PROFITS OR BENEFITS, OR
+FOR DAMAGES ARISING FROM ANY TORT (INCLUDING NEGLIGENCE OR
+GROSS NEGLIGENCE) OR FAULT COMMITTED BY TechKnow Space, ITS AGENTS
+OR EMPLOYEES, OR FOR ANY BREACH OF CONTRACT OR FOR ANY CLAIM
+BROUGHT AGAINST PURCHASER BY ANY OTHER PARTY.
+
+THIS WARRANTY GIVES YOU SPECIFIC LEGAL RIGHTS, AND YOU MAY
+ALSO HAVE OTHER RIGHTS, WHICH VARY FROM STATE TO STATE/PROVINCE TO PROVINCE. THIS LIMITED WARRANTY SHALL NOT
+EXTEND TO ANYONE OTHER THAN THE ORIGINAL PURCHASER OF THIS
+PRODUCT AND STATES PURCHASER’S EXCLUSIVE REMEDY. IF ANY
+PORTION OF THIS LIMITED WARRANTY IS HELD ILLEGAL OR
+UNENFORCEABLE BY RESON OF ANY LAW, SUCH PARTIAL ILLEGALITY OR
+UNENFORCEABILITY SHALL NOT AFFECT THE ENFORCEABILITY FOR THE
+REMAINDER OF THIS LIMITED WARRANTY WHICH PURCHASER
+ACKNOWLEDGES IS AND WILL ALWAYS BE CONSTRUED TO BE LIMITED
+BY ITS TERMS OR AS LIMITED AS THE LAW PERMITS.
+THE PARTIES UNDERSTAND THAT THE PURCHASER MAY USE THIRDPARTY
+SOFTWARE OR EQUIPMENT IN CONJUNCTION WITH THE PRODUCT.
+TechKnow Space MAKES NO WARRANTIES OR REPRESENTATIONS AND THERE
+ARE NO CONDITIONS, EXPRESS OR IMPLIED, STATUTORY OR OTHERWISE,
+AS TO THE QUALITY, CAPABILITIES, OPERATIONS, PERFORMANCE OR
+SUITABILITY OF ANY THIRD-PARTY SOFTWARE OR EQUIPMENT, WHETHER
+SUCH THIRD-PARTY SOFTWARE OR EQUIPMENT IS INCLUDED WITH THE
+PRODUCT DISTRIBUTED BY TechKnow Space OR OTHERWISE, INCLUDING THE
+ABILITY TO INTEGRATE ANY SUCH SOFTWARE OR EQUIPMENT WITH THE
+PRODUCT. THE QUALITY, CAPABILITIES, OPERATIONS, PERFORMANCE
+AND SUITABILITY OF ANY SUCH THIRD-PARTY SOFTWARE OR EQUIPMENT
+LIE SOLELY WITH THE PURCHASER AND THE DIRECT VENDOR, OWNER OR
+SUPPLIER OF SUCH THIRD-PARTY SOFTWARE OR EQUIPMENT, AS THE
+CASE MAY BE. TechKnow Space’s liability is limited to the value of the repair
+up to the replacment cost of the device. There will be no liability to TechKnow Space
+beyond the value of the repair or cost of replacement of the physical device including
+but not limited to loss of profits, loss of data stored on the device, loss of access to data stored on remote
+computers (the cloud), or loss of operational capability, or any other damages.
+
+This Limited Warranty allocates risk of Product failure between Purchaser and
+TechKnow Space , and TechKnow Space’s Product pricing reflects this allocation of risk and the
+limitations of liability contained in this Limited Warranty. The agents, employees,
+distributors, and dealers of TechKnow Space are not authorized to make modifications to this
+Limited Warranty, or make additional warranties binding on TechKnow Space. Accordingly,
+additional statements such as dealer advertising or presentations, whether oral or written,
+do not constitute warranties by TechKnow Space and should not be relied upon.
+
+</template>
