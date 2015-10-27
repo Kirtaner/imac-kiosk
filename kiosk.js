@@ -120,6 +120,10 @@ if (Meteor.isClient) {
     return Session.get('policyPane');
   });
 
+  Template.registerHelper('policyPaneUrl', function(){
+    return Session.get('policyPaneUrl');
+  });
+
   showSuccessModal = function(){
     id = Session.get('lastId');
 
@@ -175,7 +179,33 @@ if (Meteor.isClient) {
     }
   });
 
+  Template.modeSelectionModal.events({
+    'mousemove': function(){
+      modalTimeout();
+    },
+    'keypress': function(){
+      modalTimeout();
+    }
+  });
+
+  Template.policyModal.events({
+    'mousemove': function(){
+      modalTimeout();
+    },
+    'keypress': function(){
+      modalTimeout();
+    }
+  });
+
   Template.customerFormModal.rendered = function(){
+    modalTimeout();
+  }
+
+  Template.modeSelectionModal.rendered = function(){
+    modalTimeout();
+  }
+
+  Template.policyModal.rendered = function(){
     modalTimeout();
   }
 
