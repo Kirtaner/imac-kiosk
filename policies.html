@@ -6,17 +6,39 @@
         }
 
         #selectionBox {
+            text-align: center;
         }
 
         #selectionBox a {
-            background: rgba(50,50,50,0.7);
+            background: rgba(60,60,60,0.8);
             border-radius: 100%;
-            border: 20px solid rgba(50,50,50,0.6);
+            border: 10px solid rgba(60,60,60,0.8);
             width: 300px;
             height: 300px;
             line-height: 260px;
             text-align: center;
             display: inline-block;
+            text-decoration: none;
+            color: #fff;
+            margin: 0 30px;
+            text-shadow: 0px 4px 6px rgba(0,0,0,0.6);
+        }
+
+        #selectionBox a:hover {
+            color: rgba(249, 175, 1, 1);
+
+        }
+
+        #selectionBox a span {
+            display: block;
+            line-height: 40px;
+            font-size: 28pt;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        #selectionBox a i {
+            font-size: 120pt;
+            line-height: 260px;
         }
     </style>
 
@@ -25,13 +47,39 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-sm-4 col-sm-offset-4" id="selectionBox">
-                       <a href="#">Create Profile</a>
-                       <a href="#">View Policies</a>
+                        <a href="#" id="createProfile">
+                            <i class="fa fa-user"></i>
+                            <span class="buttonText">CREATE PROFILE</span>
+                        </a>
+                        <a href="#" id="viewPolicies">
+                            <i class="fa fa-file-text-o"></i>
+                            <span class="buttonText">VIEW POLICIES</span>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script type="text/javascript">
+        $('#createProfile').on('click', function(){
+            Modal.hide('modeSelectionModal');
+
+            setTimeout(function(){
+                Modal.show('customerFormModal');
+            }, 350);
+        });
+
+        $('#viewPolicies').on('click', function(){
+            Modal.hide('modeSelectionModal');
+
+            Session.set('policyPane', 'iframePlaceholder');
+            setTimeout(function(){
+                Modal.show('policyModal');
+            }, 350);
+        });
+
+    </script>
 
 </template>
 
@@ -48,17 +96,63 @@
 
     <style type="text/css">
         #policies {
-            font-family: "Helvetica Neue";
-            font-size: 1.3em;
-            margin-top: 100px;
+            font-family: "Roboto";
+            font-size: 1.4em;
+            margin-top: 60px;
+        }
+        #policies h1 {
+            color: #fff;
+            font-weight: semi-bold;
+            font-size: 3.4em;
+            text-shadow: -4px 4px 4px rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            vertical-align: center;
+        }
+        #policies h1 img {
+            margin-right: 10px;
+        }
+        a.list-group-item {
+            color: #fff;
+            background: #303030;
+            text-decoration: none;
+            border-color: #444;
+            font-weight: bold;
+        }
+        a.list-group-item:hover {
+            color: #303030;
+            background: rgba(239, 165, 1, 1);
+            text-decoration: none;
+            border-color: #666;
+        }
+        a.list-group-item.active {
+            color: #303030;
+            background: rgba(239, 165, 1, 1);
+        }
+        a.list-group-item.active:hover {
+            color: #303030;
+            background: rgba(249, 175, 1, 1);
+        }
+        a.list-group-item.active, a.list-group-item.active:hover, a.list-group-item:hover {
+            text-shadow:
+                -1px -1px 0 #fff,
+                1px -1px 0 #fff,
+                -1px 1px 0 #fff,
+                1px 1px 0 #fff;
+        }
+        .fast {
+            animation-duration: .75s;
         }
     </style>
 
     <div id="policies">
         <div class="container-fluid">
             <div class="row">
+                <div class="col-sm-10 col-sm-offset-1 animated slideInLeft fast">
+                    <h1><img src="/svg/ttshead.svg">Our Policies</h1>
+                </div>
 
-                <div class="col-sm-3 col-sm-offset-1">
+                <div class="col-sm-3 col-sm-offset-1 animated slideInLeft fast">
                     <div class="list-group">
                         {{ > policyIndex }}
                     </div>
@@ -71,15 +165,38 @@
                 </div>
 
             </div>
+
+            <div class="row">
+
+                <div class="col-sm-10 col-sm-offset-1 animated slideInLeft fast">
+                    <button id="createProfile" type="button" class="btn btn-warning">Create Your Profile</button>
+                    <button id="closePolicies" type="button" class="btn btn-danger">Close</button>
+                </div>
+
+            </div>
         </div>
     </div>
 
     <script type="text/javascript">
         $('.list-group a').on('click', function(){
             var url = $(this).data('url');
-            Session.set('policyPane', 'iFrame');
+            $('.list-group a').removeClass('active');
+            $(this).addClass('active');
+            Session.set('policyPane', 'iframe');
             Session.set('policyPaneUrl', url);
             $('.policy iframe').css('height', $('div.list-group').height());
+        });
+
+        $('#createProfile').on('click', function(){
+            Modal.hide('policyModal');
+
+            setTimeout(function(){
+                Modal.show('customerFormModal');
+            }, 350);
+        });
+
+        $('#closePolicies').on('click', function(){
+            Modal.hide('policyModal');
         });
     </script>
 
@@ -91,13 +208,11 @@
     <a href="#" data-url="http://techknowspace.com/information/buying-parts-or-buying-a-solution/" class="list-group-item">Buying Parts vs Buying a Solution</a>
     <a href="#" data-url="http://techknowspace.com/information/diagnostics-fees/" class="list-group-item">Diagnostics Process and Fees</a>
     <a href="#" data-url="http://techknowspace.com/information/taxes/" class="list-group-item">Do I Have to Pay Tax?</a>
-    <a href="#" data-url="http://techknowspace.com/information/Employment%20Opportunities" class="list-group-item">Employment Opportunities</a>
     <a href="#" data-url="http://techknowspace.com/information/samsung-glass-only-replacement/" class="list-group-item">Glass vs Screen Assembly</a>
     <a href="#" data-url="http://techknowspace.com/information/guiding-principles/" class="list-group-item">Guiding Principles</a>
     <a href="#" data-url="http://techknowspace.com/information/how-do-i-pay/" class="list-group-item">How Do I Pay</a>
     <a href="#" data-url="http://techknowspace.com/information/limitation-of-liability/" class="list-group-item">Limitation of Liability</a>
     <a href="#" data-url="http://techknowspace.com/information/liquid-damage/" class="list-group-item">Liquid Damage Processes and Fees</a>
-    <a href="#" data-url="http://techknowspace.com/information/mail-in-instructions/" class="list-group-item">Mail-In Instructions</a>
     <a href="#" data-url="http://techknowspace.com/information/manufacturers-warranty-vs-our-solution/" class="list-group-item">Manufacturer Warranty vs Our Solution</a>
     <a href="#" data-url="http://techknowspace.com/information/ecosystem/" class="list-group-item">Our Sustainable Ecosystem</a>
     <a href="#" data-url="http://techknowspace.com/information/password-policy/" class="list-group-item">Password Policy</a>
@@ -112,9 +227,35 @@
 
 </template>
 
+<template name="iframePlaceholder">
 
-<template name="iFrame">
+    <style type="text/css">
+        #placeholderContainer {
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+        #placeholderContainer p {
+            font-size: 56pt;
+            font-weight: semi-bold;
+            color: #fff;
+            align-items: center;
+        }
+    </style>
 
-    <iframe seamless="seamless" frameBorder="0" src="{{ policyPaneUrl }}" style="width: 100%; height: 100%; border: 0; border-radius: 5px; overflow: hidden;"></iframe>
+    <div id="placeholderContainer">
+        <p>Please select a policy page to view</p>
+    </div>
 
+</template>
+
+<template name="iframe">
+
+    <div class="iframeContainer" style="overflow: hidden; border-radius: 5px; position: relative; height: 100%; width: 100%;">
+        <iframe seamless="seamless" frameBorder="0" src="{{ policyPaneUrl }}" style="width: 100%; height: 100%; border: 0; border-radius: 5px;"></iframe>
+    </div>
+
+    <script type="text/javascript">
+        $('.policy iframe').css('height', $('div.list-group').height());
+    </script>
 </template>

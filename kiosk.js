@@ -163,10 +163,10 @@ if (Meteor.isClient) {
 
   Template.kiosk.events({
     'mousemove': function(){
-      Modal.show('customerFormModal');
+      Modal.show('modeSelectionModal');
     },
     'keypress': function(){
-      Modal.show('customerFormModal');
+      Modal.show('modeSelectionModal');
     }
   });
 
@@ -211,7 +211,7 @@ if (Meteor.isClient) {
 
   function modalTimeout(){
     clearTimeout(idleModal);
-    idleModal = setTimeout(function(){ Modal.hide('customerFormModal'); }, 30000);
+    idleModal = setTimeout(function(){ Modal.hide(); }, 30000);
   }
 
 };

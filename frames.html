@@ -4,6 +4,61 @@
     <link rel="stylesheet" type="text/css" href="/css/frames.css">
     <script type="text/javascript" src="/js/tendrils.js"></script>
 
+    <style type="text/css">
+        html {
+            background: url('/images/bg/{{ currentBackground }}.jpg') no-repeat !important;
+            animation: panning 160s infinite linear;
+            -webkit-animation: panning 160s infinite linear;
+        }
+
+        .ios {
+            display: flex;
+        }
+
+        .slide_wrapper {
+            align-self: flex-end;
+            position: relative;
+            width: 100%;
+/*            margin-left: 20px;
+            margin-bottom: 20px;
+*/        }
+
+        .ghost_text,
+        .text_mask {
+            font-size: 72px;
+        }
+
+        .ghost_text {
+            color: rgba(239, 165, 1, 0.4);
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 0;
+            text-shadow: -2px 2px 3px rgba(0,0,0,0.5);
+        }
+
+        .text_mask {
+            background-image: radial-gradient(circle 3em at 0%, #ffd700 0%, rgba(0, 0, 0, 0) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            z-index: 1;
+        }
+    </style>
+
+    <div style="height: 100%;">
+        {{> Template.dynamic template=currentFrame }}
+    </div>
+
+    <div class="ios" style="position: fixed; bottom: 20px; left: 30px;">
+        <div class="slide_wrapper">
+            <span class="ghost_text">MOVE MOUSE TO START</span>
+            <span class="text_mask">MOVE MOUSE TO START</span>
+        </div>
+    </div>
+
     <script type="text/javascript">
         var randomBackground = function() {
             bg = Math.floor((Math.random() * 5) + 1);
@@ -14,21 +69,30 @@
 
             Session.set('currentBackground', bg);
         }
+
+        var gradient_percent = 0,
+            gradient_offset = {
+              min: -40,
+              max: 140
+            },
+            speed = 2,
+            // gradient_color = 'rgba(255, 255, 255, 1)',
+            gradient_color = 'rgba(239, 165, 1, 1)',
+            empty_color = 'rgba(0, 0, 0 , 0)';
+
+        setInterval(function() {
+          gradient_percent += speed;
+
+          if (gradient_percent > gradient_offset.max) {
+            gradient_percent = gradient_offset.min;
+          }
+
+          $('.text_mask').css('background-image', '-webkit-radial-gradient('+ gradient_percent +'% 50%, 3em 2em, ' + gradient_color + ' 0%, ' + empty_color + ' 100%)')
+        }, 17);
     </script>
 
-    <style type="text/css">
-        html {
-            background: url('/images/bg/{{ currentBackground }}.jpg') no-repeat !important;
-            animation: panning 160s infinite linear;
-            -webkit-animation: panning 160s infinite linear;
-        }
-    </style>
-
-    <div style="height: 100%;">
-        {{> Template.dynamic template=currentFrame }}
-    </div>
-
 </template>
+
 
 <!-- DEMO MODE TEMPLATE -->
 <template name="demo">
@@ -101,7 +165,7 @@
 <template name="ttsCalloutTimeout">
     <script type="text/javascript">
         setTimeout(function(){
-            dice = Array('ttsCalloutLive','quoteFrame','ttsCalloutBusinessLive');
+            dice = Array('ttsCalloutLive','ttsCalloutLive','quoteFrame','ttsCalloutBusinessLive');
             roll = dice[Math.floor(Math.random()*dice.length)];
 
             while(Session.get('currentFrame') === roll) {
@@ -630,7 +694,7 @@
         }
 
         span.subtext {
-            font-size: 72pt;
+            font-size: 64pt;
             color: #fff;
         }
     </style>
@@ -638,16 +702,16 @@
     <div class="row">
 
         <div class="col-sm-4 animated fadeInUp delay">
-            <img src="/images/devices/iphones.png" style="max-height: 480px;"><br>
+            <img src="/images/devices/iphones.png" style="max-height: 460px;"><br>
 
             <span class="subtext">PHONES<br>1 HOUR</span>
         </div>
         <div class="col-sm-4 animated fadeInUp delay">
-            <img src="/images/devices/ipads.png" style="max-height: 480px;"><br>
+            <img src="/images/devices/ipads.png" style="max-height: 460px;"><br>
             <span class="subtext">TABLETS<br>2 HOURS</span>
         </div>
         <div class="col-sm-4 animated fadeInUp delay">
-            <img src="/images/devices/macbook.png" style="max-height: 480px;"><br>
+            <img src="/images/devices/macbook.png" style="max-height: 460px;"><br>
             <span class="subtext">LAPTOPS<br>1 DAY</span>
         </div>
     </div>

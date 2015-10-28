@@ -36,7 +36,6 @@ if (Meteor.isClient) {
 
     frame = frames[Math.floor(Math.random()*frames.length)];
 
-    return 'liquidDamage';
     return frame;
   }
 
