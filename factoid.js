@@ -35,7 +35,7 @@ if (Meteor.isClient) {
                   );
 
     frame = frames[Math.floor(Math.random()*frames.length)];
-
+    // return 'dataRecovery';
     return frame;
   }
 
