@@ -13,6 +13,8 @@
 
         .ios {
             display: flex;
+            /*font-family: Roboto;*/
+            font-weight: bold;
         }
 
         .slide_wrapper {
@@ -23,22 +25,22 @@
 
         .ghost_text,
         .text_mask {
-            font-size: 72px;
+            font-size: 64px;
         }
 
         .ghost_text {
-            color: rgba(239, 165, 1, 0.4);
+            color: rgba(239, 165, 1, 0.5);
             position: absolute;
             top: 0;
             bottom: 0;
             left: 0;
             right: 0;
             z-index: 0;
-            text-shadow: -2px 2px 3px rgba(0,0,0,0.5);
+            text-shadow: -2px 2px 3px rgba(0,0,0,0.1);
         }
 
         .text_mask {
-            background-image: radial-gradient(circle 3em at 0%, #ffd700 0%, rgba(0, 0, 0, 0) 100%);
+            background-image: radial-gradient(circle 3em at 0%, rgba(255, 185, 20, 1) 0%, rgba(0, 0, 0, 0) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             position: relative;
@@ -68,14 +70,21 @@
             Session.set('currentBackground', bg);
         }
 
+        jQuery.swapModal = function(modal, speed){
+            $('.modal, .modal-backdrop').fadeOut(speed, function(){
+                $.when($(this).remove()).then( Modal.show(modal) );
+            });
+        };
+
         var gradient_percent = 0,
             gradient_offset = {
               min: -40,
               max: 140
             },
-            speed = 2,
+            speed = 1.5,
             // gradient_color = 'rgba(255, 255, 255, 1)',
-            gradient_color = 'rgba(239, 165, 1, 1)',
+            gradient_color = 'rgba(255, 200, 40, 1)',
+            // gradient_color = 'rgba(239, 165, 1, 1)',
             empty_color = 'rgba(0, 0, 0 , 0)';
 
         setInterval(function() {

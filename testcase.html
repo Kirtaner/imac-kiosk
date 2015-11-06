@@ -10,3 +10,131 @@
 </template>
 
 
+<template name="policiesNew">
+
+    <style type="text/css">
+        html, body {
+            background: #000;
+        }
+        #policies {
+            font-family: "Roboto";
+            font-size: 1.4em;
+            margin-top: 60px;
+        }
+        #policies h1 {
+            color: #fff;
+            font-weight: semi-bold;
+            font-size: 3.4em;
+            text-shadow: -4px 4px 4px rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            vertical-align: center;
+        }
+        #policies h1 img {
+            margin-right: 10px;
+        }
+        a.list-group-item {
+            color: #fff;
+            background: #303030;
+            text-decoration: none;
+            border-color: #444;
+            font-weight: bold;
+        }
+        a.list-group-item:hover {
+            background: rgba(239, 165, 1, 1);
+            text-decoration: none;
+            border-color: #666;
+        }
+        a.list-group-item.active {
+            background: rgba(239, 165, 1, 1);
+            border-color: #eee;
+        }
+        a.list-group-item.active:hover {
+            background: rgba(249, 175, 1, 1);
+            border-color: #fff;
+        }
+        a.list-group-item.active, a.list-group-item.active:hover, a.list-group-item:hover {
+            color: #303030;
+            text-shadow:
+                -1px -1px 0 #fff,
+                1px -1px 0 #fff,
+                -1px 1px 0 #fff,
+                1px 1px 0 #fff;
+        }
+        .fast {
+            animation-duration: .75s;
+        }
+    </style>
+
+    <div id="policies">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-10 col-sm-offset-1 animated slideInLeft fast">
+                    <h1><img src="/svg/ttshead.svg">Our Policies</h1>
+                </div>
+
+                <div class="col-sm-3 col-sm-offset-1 animated slideInLeft fast">
+                    <div class="list-group">
+                        {{ > policyIndex }}
+                    </div>
+                </div>
+
+                <div class="col-sm-7 policy">
+                    {{#Animate}}
+                        {{ > Template.dynamic template=policyPane }}
+                    {{/Animate}}
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-sm-10 col-sm-offset-1 animated slideInLeft fast">
+                    <button id="createProfile" type="button" class="btn btn-warning">Create Your Profile</button>
+                    <button id="closePolicies" type="button" class="btn btn-danger">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        Session.set('policyPane', 'iframePlaceholder');
+
+        $('.list-group a').on('click', function(){
+            var url = $(this).data('url') + '?keyword=kiosk-nohead';
+            $('.list-group a').removeClass('active');
+            $(this).addClass('active');
+
+            HTTP.call("GET", url, function(error, result){
+                if(!error) {
+                    div = $(jQuery.parseHTML(result.content)).find('#kioskContent').html();
+                    Session.set('policyPageContent', div);
+                    Session.set('policyPane', 'policyPage');
+                }
+            });
+        });
+
+        $('#createProfile').on('click', function(){
+            Modal.hide('policyModal');
+
+            setTimeout(function(){
+                Modal.show('customerFormModal');
+            }, 350);
+        });
+
+        $('#closePolicies').on('click', function(){
+            Modal.hide('policyModal');
+        });
+    </script>
+
+</template>
+
+
+<template name="policyPage">
+
+    <div class="policyPageContainer" style="border-radius: 5px; height: 100%; width: 100%; background: #404040;">
+        {{{ policyPageContent }}}
+    </div>
+
+</template>

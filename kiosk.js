@@ -124,6 +124,10 @@ if (Meteor.isClient) {
     return Session.get('policyPaneUrl');
   });
 
+  Template.registerHelper('policyPageContent', function(){
+    return Session.get('policyPageContent');
+  });
+
   showSuccessModal = function(){
     id = Session.get('lastId');
 
@@ -136,7 +140,7 @@ if (Meteor.isClient) {
       setTimeout(function(){
         Modal.hide('successModal');
         setTimeout(function(){
-          $('.modal, .modal-backdrop').remove();
+          $('.modal, .modal-backdrop').fadeOut().remove();
         }, 500);
       }, 2000);
     }, 500);

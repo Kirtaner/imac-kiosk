@@ -17,7 +17,7 @@ Router.route('/list', {
 });
 
 Router.route('/policy', {
-  template: 'policies'
+  template: 'policiesNew'
 });
 
 Router.route('/build', {
