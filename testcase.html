@@ -47,7 +47,7 @@
             text-decoration: none;
             border-color: #666;
         }
-        a.list-group-item.active {
+        a.list-group-item:active, a.list-group-item.active, a.list-group-item.active:focus {
             background: rgba(239, 165, 1, 1);
             border-color: #eee;
         }
@@ -55,7 +55,7 @@
             background: rgba(249, 175, 1, 1);
             border-color: #fff;
         }
-        a.list-group-item.active, a.list-group-item.active:hover, a.list-group-item:hover {
+        a.list-group-item.active, a.list-group-item.active:hover, a.list-group-item:hover, a.list-group-item.active:focus  {
             color: #303030;
             text-shadow:
                 -1px -1px 0 #fff,
@@ -104,6 +104,7 @@
         Session.set('policyPane', 'iframePlaceholder');
 
         $('.list-group a').on('click', function(){
+            Session.set('policyPane', 'spinner');
             var url = $(this).data('url') + '?keyword=kiosk-nohead';
             $('.list-group a').removeClass('active');
             $(this).addClass('active');
@@ -158,10 +159,26 @@
         .policyPageContainer ul li {
             margin-bottom: 10px;
         }
+        .policyPageContainer .panel-heading {
+            background: #444;
+            color: #fff;
+        }
+        .policyPageContainer .panel-default {
+            border-color: #555;
+        }
+        .policyPageContainer .panel-body {
+            background-color: #333 !important;
+        }
     </style>
 
     <div class="policyPageContainer" >
         {{{ policyPageContent }}}
     </div>
 
+</template>
+
+<template name="spinner">
+    <div id="spinner" style="margin-top: 400px">
+        {{> spinner}}
+    </div>
 </template>
