@@ -43,7 +43,7 @@
     "affix"                : false,
     "alert"                : false,
     "button"               : true,
-    "collapse"             : false,
+    "collapse"             : true,
     "scrollspy"            : false,
     "tab"                  : false,
     "transition"           : false,

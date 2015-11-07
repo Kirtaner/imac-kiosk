@@ -39,6 +39,8 @@
             text-decoration: none;
             border-color: #444;
             font-weight: bold;
+            padding: 12px 15px;
+            font-size: 1.1em;
         }
         a.list-group-item:hover {
             background: rgba(239, 165, 1, 1);
@@ -108,9 +110,9 @@
 
             HTTP.call("GET", url, function(error, result){
                 if(!error) {
-                    div = $(jQuery.parseHTML(result.content)).find('#kioskContent').html();
-                    Session.set('policyPageContent', div);
+                    Session.set('policyPageContent', result.content);
                     Session.set('policyPane', 'policyPage');
+                    $('.policyPageContainer').css('max-height', $('div.list-group').height());
                 }
             });
         });
@@ -132,8 +134,33 @@
 
 
 <template name="policyPage">
+    <style type="text/css">
+        .policyPageContainer {
+            border-radius: 5px;
+            background: #303030;
+            color: #fff;
+            /*font-size: 1.1em;*/
+            padding: 20px;
+            overflow: scroll;
+        }
 
-    <div class="policyPageContainer" style="border-radius: 5px; height: 100%; width: 100%; background: #404040;">
+        .policyPageContainer::-webkit-scrollbar { width: 0 !important }
+
+        .policyPageContainer p {
+            margin-bottom: 20px;
+        }
+
+        .policyPageContainer ul {
+            list-style: dot;
+            margin-left: 30px;
+            margin-bottom: 20px;
+        }
+        .policyPageContainer ul li {
+            margin-bottom: 10px;
+        }
+    </style>
+
+    <div class="policyPageContainer" >
         {{{ policyPageContent }}}
     </div>
 
