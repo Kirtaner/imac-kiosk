@@ -57,7 +57,7 @@ if (Meteor.isClient) {
   /* Quote frame helpers */
 
   var randomQuote = function() {
-    quote = 'quote'+Math.floor((Math.random() * 13) + 1);
+    quote = 'quote'+Math.floor((Math.random() * 14) + 1);
     return quote;
   }
 

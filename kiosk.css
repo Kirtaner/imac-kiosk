@@ -25,6 +25,9 @@ input, select, button, textarea {
   overflow: hidden-x;
 }
 
+.kiosk-hidden {
+  display: none !important;
+}
 
 /* Animations */
 
