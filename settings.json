@@ -1,0 +1,12 @@
+    {
+      "database": {
+        "server"   : "192.168.1.1",
+        "database" : "database",
+        "user"     : "username",
+        "password" : "password",
+        "options"  : {
+          "useUTC"     : false,
+          "appName"    : "MeteorApp"
+        }
+      }
+    }
