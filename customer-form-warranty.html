@@ -1,0 +1,136 @@
+<template name="customerFormWarranty">
+
+    <div class="container" id="customerForm" style="margin-top:16em">
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2">
+                <img src="/svg/ttslogo.svg" style="width:100%">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-8 col-sm-offset-2">
+                <div class="panel panel-warning">
+                    <div class="panel-heading">
+                        <h3>Create Customer Profile</h3>
+                    </div>
+
+                    <div class="panel-body">
+                        {{#autoForm id="customerData" type="insert" collection=Collections.CustomersWarranty resetOnSuccess="true"}}
+                            {{ > afQuickField id='firstName' name='firstName' placeholder='schemaLabel' autocomplete='off' label=false }}
+                            {{ > afQuickField id='lastName' name='lastName' placeholder='schemaLabel' autocomplete='off' label=false }}
+                            {{ > afQuickField id='emailAddress' name='emailAddress' placeholder='schemaLabel' autocomplete='off' label=false }}
+                            {{ > afQuickField id='address' name='address' placeholder='schemaLabel' autocomplete='off' label=false }}
+                            {{ > afQuickField id='city' name='city' placeholder='schemaLabel' autocomplete='off' label=false }}
+                            {{ > afQuickField id='postalCode' name='postalCode' placeholder='schemaLabel' autocomplete='off' label=false }}
+                            {{ > afQuickField id='mobileNumber' class='numeric' name='mobileNumber' placeholder='Mobile Phone Number' type='tel' label=false autocomplete='off' pattern='[0-9]{10}' }}
+                            {{ > afQuickField id='phoneNumber' class='numeric' name='phoneNumber' placeholder='Secondary Phone Number (If leaving a Mobile Phone for repair)' type='tel' label=false autocomplete='off' pattern='[0-9]{10}' }}
+                            {{ > afQuickField id='companyName' name='companyName' placeholder='Your Company (Optional)' autocomplete='off' label=false }}
+
+                            <h2>How did you find us? (Select one)</h2>
+
+                            {{ > afQuickField name='howDidYouFindUs' options=acquisitionOptions type='select-radio' template='buttonGroup' label=false }}
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-warning" style="margin-right: 10px">Submit</button>
+                                <button type="reset" class="btn btn-danger">Reset</button>
+                            </div>
+                        {{/autoForm}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        jQuery.fn.ForceNumericOnly =
+        function()
+        {
+            return this.each(function()
+            {
+                $(this).keydown(function(e)
+                {
+                    var key = e.charCode || e.keyCode || 0;
+                    // allow backspace, tab, delete, enter, arrows, numbers and keypad numbers ONLY
+                    // home, end, period, and numpad decimal
+                    return (
+                        key == 8 ||
+                        key == 9 ||
+                        key == 13 ||
+                        key == 46 ||
+                        key == 110 ||
+                        key == 190 ||
+                        (key >= 35 && key <= 40) ||
+                        (key >= 48 && key <= 57) ||
+                        (key >= 96 && key <= 105));
+                });
+            });
+        };
+
+        $("input.numeric").ForceNumericOnly();
+
+        $(document).on('click', '#accept', function(){
+            showSuccessModal();
+            $('input:radio').prop('checked', false);
+            $('label.btn').removeClass('active');
+        });
+
+        $(document).on('click', '#cancel', function(){
+            fields = Session.get('confirmInformation');
+
+            $('#firstName').val(fields.firstName);
+            $('#lastName').val(fields.lastName);
+            $('#emailAddress').val(fields.emailAddress);
+            $('#postalCode').val(fields.postalCode);
+            $('#mobileNumber').val(fields.mobileNumber);
+            $('#phoneNumber').val(fields.phoneNumber);
+            $('#companyName').val(fields.companyName);
+            $('input[name=acquisition][value=' + fields.acquisition + ']').prop('checked', true);
+
+            CustomersWarranty.remove(Session.get('lastId'));
+            Modal.hide('confirmationWarrantyModal');
+        });
+    </script>
+
+</template>
+
+
+<template name="customerFormWarrantyModal">
+
+    <div class="modal fade">
+        {{ > customerFormWarranty }}
+    </div>
+
+</template>
+
+
+<template name="confirmationWarrantyModal">
+
+    <div class="modal fade">
+        <div class="container" id="confirm" style="margin-top:36em">
+            <div class="row">
+                <div class="col-sm-4 col-sm-offset-4">
+                    <div class="panel panel-warning">
+                        <div class="panel-heading">
+                            <h3><center>Please Confirm Your Information</center></h3>
+                        </div>
+
+                        <div class="panel-body">
+
+                            {{#with confirmInformation }}
+                                <h3>{{ firstName }} {{ lastName }}</h3><br>
+                                {{ emailAddress }}<br>
+                                {{ postalCode }}<br>
+                                {{ mobileNumber }}<br>
+                                {{ phoneNumber }}<br>
+                                {{ companyName }}<br>
+                            {{/with }}
+
+                            <button id="accept" class="btn btn-success" style="margin-right: 10px">Confirm</button>
+                            <button id="cancel" class="btn btn-danger">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</template>

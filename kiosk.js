@@ -1,8 +1,10 @@
 /* Customer data schema */
 
-Schemas = {};
+var Schemas = {};
+var Collections = {};
 
 Meteor.isClient && Template.registerHelper("Schemas", Schemas);
+Meteor.isClient && Template.registerHelper("Collections", Collections);
 
 Schemas.Customer = new SimpleSchema({
   firstName: {
@@ -38,12 +40,50 @@ Schemas.Customer = new SimpleSchema({
     type: Boolean,
     optional: true
   }
-
 });
 
-var Collections = {};
+Schemas.CustomerWarranty = new SimpleSchema({
+  firstName: {
+    type: String,
+    index: false
+  },
+  lastName: {
+    type: String,
+  },
+  emailAddress: {
+    type: String,
+    regEx: SimpleSchema.RegEx.Email
+  },
+  companyName: {
+    type: String,
+    optional: true
+  },
+  address: {
+    type: String,
+  },
+  city: {
+    type: String,
+  },
+  postalCode: {
+    type: String,
+  },
+  mobileNumber: {
+    type: Number
+  },
+  phoneNumber: {
+    type: Number,
+    optional: true
+  },
+  howDidYouFindUs: {
+    type: String,
+    // optional: true
+  },
+  confirmed: {
+    type: Boolean,
+    optional: true
+  }
 
-Meteor.isClient && Template.registerHelper("Collections", Collections);
+});
 
 Customers = Collections.Customers = new Mongo.Collection('Customers');
 
@@ -51,6 +91,20 @@ Customers.attachSchema(Schemas.Customer);
 
 
 Customers.allow({
+  insert: function () {
+    return true;
+  },
+  remove: function () {
+    return true;
+  }
+});
+
+CustomersWarranty = Collections.CustomersWarranty = new Mongo.Collection('CustomersWarranty');
+
+CustomersWarranty.attachSchema(Schemas.CustomerWarranty);
+
+
+CustomersWarranty.allow({
   insert: function () {
     return true;
   },
@@ -146,20 +200,45 @@ if (Meteor.isClient) {
     }, 500);
   }
 
+  showSuccessModalWarranty = function(){
+    id = Session.get('lastId');
+
+    CustomersWarranty.update(id, {$set: {confirmed: true}}, {validate: false});
+
+    Modal.hide('confirmationWarrantyModal');
+
+    setTimeout(function(){
+      Modal.show('successModal');
+      setTimeout(function(){
+        Modal.hide('successModal');
+        setTimeout(function(){
+          $('.modal, .modal-backdrop').fadeOut().remove();
+        }, 500);
+      }, 2000);
+    }, 500);
+  }
+
   Template.customerList.helpers({
     customers: function () {
-      // return Customers.find();
       return Customers.find({confirmed:true});
+    },
+    customersWarranty: function () {
+      return CustomersWarranty.find({confirmed:true});
     }
+
   });
 
   Customers.find().observeChanges({
     added: function(id, fields) {
       notifyNewCustomer();
-      // Modal.hide('customerFormModal');
     }
   });
 
+  CustomersWarranty.find().observeChanges({
+    added: function(id, fields) {
+      notifyNewCustomer();
+    }
+  });
 
   /* KIOSK DEMO MODE */
 
