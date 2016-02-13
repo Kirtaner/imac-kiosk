@@ -1,3 +1,47 @@
+<template name="autoFormNormal">
+    {{#autoForm id="customerData" type="insert" collection=Collections.Customers resetOnSuccess="true"}}
+        {{ > afQuickField id='firstName' name='firstName' placeholder='schemaLabel' autocomplete='off' label=false }}
+        {{ > afQuickField id='lastName' name='lastName' placeholder='schemaLabel' autocomplete='off' label=false }}
+        {{ > afQuickField id='emailAddress' name='emailAddress' placeholder='schemaLabel' autocomplete='off' label=false }}
+        {{ > afQuickField id='postalCode' name='postalCode' placeholder='schemaLabel' autocomplete='off' label=false }}
+        {{ > afQuickField id='mobileNumber' class='numeric' name='mobileNumber' placeholder='Mobile Phone Number' type='tel' label=false autocomplete='off' pattern='[0-9]{10}' }}
+        {{ > afQuickField id='phoneNumber' class='numeric' name='phoneNumber' placeholder='Secondary Phone Number (If leaving a Mobile Phone for repair)' type='tel' label=false autocomplete='off' pattern='[0-9]{10}' }}
+        {{ > afQuickField id='companyName' name='companyName' placeholder='Your Company (Optional)' autocomplete='off' label=false }}
+
+        <h2>How did you find us? (Select one)</h2>
+
+        {{ > afQuickField name='howDidYouFindUs' options=acquisitionOptions type='select-radio' template='buttonGroup' label=false }}
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-warning" style="margin-right: 10px">Submit</button>
+            <button type="reset" class="btn btn-danger">Reset</button>
+        </div>
+    {{/autoForm}}
+</template>
+
+<template name="autoFormWarranty">
+    {{#autoForm id="customerData" type="insert" collection=Collections.CustomersWarranty resetOnSuccess="true"}}
+        {{ > afQuickField id='firstName' name='firstName' placeholder='schemaLabel' autocomplete='off' label=false }}
+        {{ > afQuickField id='lastName' name='lastName' placeholder='schemaLabel' autocomplete='off' label=false }}
+        {{ > afQuickField id='emailAddress' name='emailAddress' placeholder='schemaLabel' autocomplete='off' label=false }}
+        {{ > afQuickField id='address' name='address' placeholder='schemaLabel' autocomplete='off' label=false }}
+        {{ > afQuickField id='city' name='city' placeholder='schemaLabel' autocomplete='off' label=false }}
+        {{ > afQuickField id='postalCode' name='postalCode' placeholder='schemaLabel' autocomplete='off' label=false }}
+        {{ > afQuickField id='mobileNumber' class='numeric' name='mobileNumber' placeholder='Mobile Phone Number' type='tel' label=false autocomplete='off' pattern='[0-9]{10}' }}
+        {{ > afQuickField id='phoneNumber' class='numeric' name='phoneNumber' placeholder='Secondary Phone Number (If leaving a Mobile Phone for repair)' type='tel' label=false autocomplete='off' pattern='[0-9]{10}' }}
+        {{ > afQuickField id='companyName' name='companyName' placeholder='Your Company (Optional)' autocomplete='off' label=false }}
+
+        <h2>How did you find us? (Select one)</h2>
+
+        {{ > afQuickField name='howDidYouFindUs' options=acquisitionOptions type='select-radio' template='buttonGroup' label=false }}
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-warning" style="margin-right: 10px">Submit</button>
+            <button type="reset" class="btn btn-danger">Reset</button>
+        </div>
+    {{/autoForm}}
+</template>
+
 <template name="customerForm">
 
     <div class="container" id="customerForm" style="margin-top:16em">
@@ -14,24 +58,7 @@
                     </div>
 
                     <div class="panel-body">
-                        {{#autoForm id="customerData" type="insert" collection=Collections.Customers resetOnSuccess="true"}}
-                            {{ > afQuickField id='firstName' name='firstName' placeholder='schemaLabel' autocomplete='off' label=false }}
-                            {{ > afQuickField id='lastName' name='lastName' placeholder='schemaLabel' autocomplete='off' label=false }}
-                            {{ > afQuickField id='emailAddress' name='emailAddress' placeholder='schemaLabel' autocomplete='off' label=false }}
-                            {{ > afQuickField id='postalCode' name='postalCode' placeholder='schemaLabel' autocomplete='off' label=false }}
-                            {{ > afQuickField id='mobileNumber' class='numeric' name='mobileNumber' placeholder='Mobile Phone Number' type='tel' label=false autocomplete='off' pattern='[0-9]{10}' }}
-                            {{ > afQuickField id='phoneNumber' class='numeric' name='phoneNumber' placeholder='Secondary Phone Number (If leaving a Mobile Phone for repair)' type='tel' label=false autocomplete='off' pattern='[0-9]{10}' }}
-                            {{ > afQuickField id='companyName' name='companyName' placeholder='Your Company (Optional)' autocomplete='off' label=false }}
-
-                            <h2>How did you find us? (Select one)</h2>
-
-                            {{ > afQuickField name='howDidYouFindUs' options=acquisitionOptions type='select-radio' template='buttonGroup' label=false }}
-
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-warning" style="margin-right: 10px">Submit</button>
-                                <button type="reset" class="btn btn-danger">Reset</button>
-                            </div>
-                        {{/autoForm}}
+                        {{> Template.dynamic template=currentForm }}
                     </div>
                 </div>
             </div>
@@ -77,6 +104,8 @@
             $('#firstName').val(fields.firstName);
             $('#lastName').val(fields.lastName);
             $('#emailAddress').val(fields.emailAddress);
+            $('#address').val(fields.address);
+            $('#city').val(fields.city);
             $('#postalCode').val(fields.postalCode);
             $('#mobileNumber').val(fields.mobileNumber);
             $('#phoneNumber').val(fields.phoneNumber);
@@ -84,6 +113,7 @@
             $('input[name=acquisition][value=' + fields.acquisition + ']').prop('checked', true);
 
             Customers.remove(Session.get('lastId'));
+            CustomersWarranty.remove(Session.get('lastId'));
             Modal.hide('confirmationModal');
         });
     </script>
@@ -138,6 +168,8 @@
                             {{#with confirmInformation }}
                                 <h3>{{ firstName }} {{ lastName }}</h3><br>
                                 {{ emailAddress }}<br>
+                                {{ address }}<br>
+                                {{ city }}<br>
                                 {{ postalCode }}<br>
                                 {{ mobileNumber }}<br>
                                 {{ phoneNumber }}<br>

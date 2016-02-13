@@ -46,10 +46,14 @@
         <div id="selection">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-sm-4 col-sm-offset-4" id="selectionBox">
+                    <div class="col-sm-6 col-sm-offset-3" id="selectionBox">
                         <a href="#" id="createProfile">
                             <i class="fa fa-user"></i>
                             <span class="buttonText">CREATE PROFILE</span>
+                        </a>
+                        <a href="#" id="createSamsungProfile" style="vertical-align: top">
+                            <i class="fa fa-user"></i>
+                            <span class="buttonText">SAMSUNG<br>WARRANTY</span>
                         </a>
                         <a href="#" id="viewPolicies">
                             <i class="fa fa-file-text-o"></i>
@@ -63,8 +67,18 @@
 
     <script type="text/javascript">
         $('#createProfile').on('click', function(){
+            Session.set('currentForm', 'autoFormNormal');
             Modal.hide('modeSelectionModal');
 
+            setTimeout(function(){
+                Modal.show('customerFormModal');
+            }, 332);
+        });
+
+        $('#createSamsungProfile').on('click', function(){
+            Session.set('currentForm', 'autoFormWarranty');
+            Modal.hide('modeSelectionModal');
+            
             setTimeout(function(){
                 Modal.show('customerFormModal');
             }, 332);

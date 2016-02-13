@@ -45,6 +45,41 @@
                             </div>
                         </div>
                     {{/each}}
+
+                    {{#each customersWarranty}}
+                        <div class="col-sm-3">
+                            <div class="well">
+                                <h3>{{firstName}} {{lastName}}</h3>
+                                {{ emailAddress }}<br>
+                                {{ companyName }}<br>
+                                {{ address }}<br>
+                                {{ city }}<br>
+                                {{ postalCode }}<br>
+                                Mobile # - {{ mobileNumber }}<br>
+                                Secondary # - {{ phoneNumber }}<br>
+                                Acquisition - {{ howDidYouFindUs }}<br>
+                                <br>
+
+                                <button class="addCustomer btn btn-primary"
+                                        data-first="{{ firstName }}"
+                                        data-last="{{ lastName }}"
+                                        data-email="{{ emailAddress }}"
+                                        data-company="{{ companyName }}"
+                                        data-address="{{ address }}"
+                                        data-city="{{ city }}"
+                                        data-province="{{ province }}"
+                                        data-postal="{{ postalCode }}"
+                                        data-country="{{ country }}"
+                                        data-phone="{{ phoneNumber }}"
+                                        data-mobile="{{ mobileNumber }}">Add to RMS</button>
+
+                                {{# quickRemoveButton collection=Collections.Customers _id=this._id class="btn btn-sm btn-danger"}}
+                                    Clear
+                                {{/ quickRemoveButton}}
+
+                            </div>
+                        </div>
+                    {{/each}}
                 </div>
             </div>
         </div>

@@ -22,6 +22,10 @@ if (Meteor.isClient) {
     return Session.get('currentBackground');
   });
 
+  Template.registerHelper('currentForm', function(){
+    return Session.get('currentForm');
+  });
+
   /* TTS Callout frame helpers */
 
   var randomTTSCallout = function() {
