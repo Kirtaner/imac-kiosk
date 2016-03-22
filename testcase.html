@@ -79,6 +79,8 @@
                     <div class="list-group">
                         {{ > policyIndex }}
                     </div>
+                    <button id="createProfile" type="button" class="btn btn-warning">Create Your Profile</button>
+                    <button id="closePolicies" type="button" class="btn btn-danger">Close</button>
                 </div>
 
                 <div class="col-sm-7 policy">
@@ -87,16 +89,7 @@
                     {{/Animate}}
                 </div>
 
-            </div>
-
-            <div class="row">
-
-                <div class="col-sm-10 col-sm-offset-1 animated slideInLeft fast">
-                    <button id="createProfile" type="button" class="btn btn-warning">Create Your Profile</button>
-                    <button id="closePolicies" type="button" class="btn btn-danger">Close</button>
-                </div>
-
-            </div>
+            </div>            
         </div>
     </div>
 
@@ -111,6 +104,22 @@
 
             HTTP.call("GET", url, function(error, result){
                 if(!error) {
+                    data = $.parseHTML(result.content);
+                    $(data).find('img').each(function () {
+                        src = $(this).attr('src');
+                        newSrc = 'http://techknowspace.com' + src;
+                        $(this).attr('src',newSrc);
+                    });
+                    var text = '';
+                    $(data).each(function () {                                               
+                        string = $(this).html();
+                        $(this).text(string);
+                        text += $(this).text();
+                        // $(text).append($(this));
+                        console.log(text);                                                                
+                    });                    
+                    result.content = text;
+                    // console.log(result.content);
                     Session.set('policyPageContent', result.content);
                     Session.set('policyPane', 'policyPage');
                     $('.policyPageContainer').css('max-height', $('div.list-group').height());
