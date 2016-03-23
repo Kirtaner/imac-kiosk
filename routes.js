@@ -23,3 +23,7 @@ Router.route('/policy', {
 Router.route('/build', {
   template: 'build'
 });
+
+Router.route('/tablet', {
+  template: 'policiesTablet'
+});
