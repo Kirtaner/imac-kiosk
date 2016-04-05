@@ -13,7 +13,7 @@
 
     <style type="text/css">
         html, body {
-            background: #000;
+            background: #111;
             width: 1920px;
         }
         #policies {
@@ -37,7 +37,7 @@
             z-index: 1000;
             position: fixed;
             top: 0;
-            background: #000;
+            background: #111;
             padding: 10px;
         }
         #policyIndex {
@@ -60,11 +60,11 @@
         }
         a.list-group-item {
             color: #fff;
-            background: #303030;
+            background: #444;
             text-decoration: none;
-            border-color: #444;
+            border-color: #555;
             font-weight: bold;
-            padding: 12px 15px;
+            padding: 20px 15px;
             font-size: 1.1em;
         }
         a.list-group-item:hover {
@@ -127,7 +127,7 @@
         Session.set('policyPane', 'iframePlaceholder');
 
         $('.list-group a').on('click', function(){
-            Session.set('policyPane', 'spinner');
+            Session.set('policyPane', 'spinners');
             var url = $(this).data('url') + '?keyword=kiosk-nohead';
             $('.list-group a').removeClass('active');
             $(this).addClass('active');
@@ -322,9 +322,10 @@
     <style type="text/css">
         .policyPageContainer {
             border-radius: 5px;
-            background: #303030;
+            background: #555;
             color: #fff;
-            /*font-size: 1.1em;*/
+            font-size: 1.2em;
+            line-height: 1.7em;
             padding: 20px;
             overflow: scroll;
         }
@@ -361,7 +362,7 @@
 
 </template>
 
-<template name="spinner">
+<template name="spinners">
     <div id="spinner" style="margin-top: 400px">
         {{> spinner}}
     </div>
