@@ -19,7 +19,6 @@ matb33:collection-hooks
 peppelg:bootstrap-3-modal
 aldeed:autoform-bs-button-group-input
 brentjanderson:buzz
-standard-minifiers
 meteor-base
 mobile-experience
 mongo
@@ -38,3 +37,5 @@ http
 aldeed:http
 sacha:spin
 emgee:mssql
+standard-minifier-css
+standard-minifier-js

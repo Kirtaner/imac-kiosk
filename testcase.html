@@ -39,6 +39,8 @@
             top: 0;
             background: #111;
             padding: 10px;
+            white-space: nowrap;
+            width: 1920px;
         }
         #policyIndex {
             font-size: 0.75em;
@@ -55,6 +57,10 @@
             text-decoration: none !important;
             background:none!important;
         }
+        .brand-warning {
+            color: rgba(239, 165, 1, 1) !important;
+            margin-bottom: 25px;
+        }       
         #policyContainer #placeholderPane {
             line-height: 94px;
         }
@@ -95,15 +101,49 @@
             display: none;
             margin-left: 1190px;
             text-shadow: 1px 1px 1px #000;
+            position: absolute;
+            right: 13px;
+            top: 15px;
         }
+        #policyTitle {
+            color: #ffffff;
+        }
+        ol {
+            margin-left: 25px;
+        } 
+        .kiosk-big {
+            font-size: 1.3em;
+        }
+        .kiosk-left {
+            text-align: left !important;
+        }
+        .kiosk-offset-top {
+            margin-top: 40px;
+            margin-bottom: 5px;
+        }
+        .flowchart {
+            margin-left: 290px;
+        } 
+        .section-heading-h2 { 
+        color: rgba(239, 165, 1, 1);
+        font-weight:bold;
+        margin-top:30px;
+        text-align:left;
+        display: block;
+        font-size: 1.7em;
+        }
+
+        @media only screen and (max-width: 1026px) {
+        .section-heading-h2 { font-size:1.7em !Important;}
+        .section-title-b {height:40px !Important;}       
     </style>
 
     <div id="policies">
         <div class="container-fluid">
             <div class="row">
                 <div id="policyHeader" class="col-sm-12 animated slideInLeft fast">
-                    <h1 style="width: 100%">
-                        <img src="/svg/ttshead.svg">Our Policies <span id="back" class="btn btn-lg btn-warning">&lt; Back</span>
+                    <h1>
+                        <img src="/svg/ttshead.svg">Store Policies <span id="back" class="btn btn-lg btn-warning">&lt; Back</span>
                     </h1>
                 </div>
 
@@ -126,18 +166,24 @@
     <script type="text/javascript">
         Session.set('policyPane', 'iframePlaceholder');
 
+        setTimeout(function(){                
+            $('.list-group a:first-child').click();
+        }, 1000);
+
         $('.list-group a').on('click', function(){
             Session.set('policyPane', 'spinners');
             var url = $(this).data('url') + '?keyword=kiosk-nohead';
             $('.list-group a').removeClass('active');
             $(this).addClass('active');
+            title = $(this).text();        
+
 
             HTTP.call("GET", url, function(error, result){
                 if(!error) {
                     data = $.parseHTML(result.content);
                     $(data).find('img').each(function () {
                         src = $(this).attr('src');
-                        newSrc = 'http://techknowspace.com' + src;
+                        newSrc = 'http://cac.techknowspace.com' + src;
                         $(this).attr('src',newSrc);
                     });
                     $(data).find('a').each(function(){
@@ -158,8 +204,12 @@
                     $('.policyPageContainer').css('max-height', $('div.list-group').height());
                     $('#policyIndex').css('display', 'none');
                     $('#back').css('display', 'inline-block');
-                    $('#policyContainer').addClass('col-sm-8 col-sm-offset-2').removeClass('col-sm-9');
+                    $('#policyContainer').addClass('col-sm-12').removeClass('col-sm-9');                    
+                    $('<h2 id="policyTitle">'+title+'</h2>').appendTo('#policyHeader');
+                    $('#policies').css('margin-top', '180px');                   
+                    
                 }
+
             });
         });
 
@@ -167,7 +217,9 @@
             Session.set('policyPane', 'iframePlaceholder');
             $(this).css('display', 'none');
             $('#policyIndex').css('display', 'block');
-            $('#policyContainer').addClass('col-sm-9').removeClass('col-sm-8 col-sm-offset-2');
+            $('#policyContainer').addClass('col-sm-9').removeClass('col-sm-12');
+            $('#policyTitle').remove();
+            $('#policies').css('margin-top', '120px');
         });
 
         $('#createProfile').on('click', function(){
@@ -241,6 +293,21 @@
         .fast {
             animation-duration: .75s;
         }
+        .brand-warning {
+            color: rgba(239, 165, 1, 1) !important;
+        }
+        .section-heading-h2 { 
+        color: rgba(239, 165, 1, 1);
+        font-weight:bold;
+        margin:0;
+        text-align:left;
+        display: block;
+        font-size: 1.7em;
+        }
+
+        @media only screen and (max-width: 1026px) {
+        .section-heading-h2 { font-size:.7em !Important;}
+        .section-title-b {height:40px !Important;}              
     </style>
 
     <div id="policies">
@@ -322,9 +389,10 @@
     <style type="text/css">
         .policyPageContainer {
             border-radius: 5px;
-            background: #555;
+            background: #444;
             color: #fff;
-            font-size: 1.2em;
+            font-size: 1.5em;
+            font-weight: 600;
             line-height: 1.7em;
             padding: 20px;
             overflow: scroll;
