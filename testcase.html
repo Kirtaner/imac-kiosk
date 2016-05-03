@@ -135,7 +135,52 @@
 
         @media only screen and (max-width: 1026px) {
         .section-heading-h2 { font-size:1.7em !Important;}
-        .section-title-b {height:40px !Important;}       
+        .section-title-b {height:40px !Important;}
+        }
+
+        #pricingTable {
+            width: 100%;
+            font-family: proxima_nova_rgbold, Arial, sans-serif;
+            font-size: 1em;
+            border: 0;
+            box-shadow: 3px 5px 14px #333222;
+            margin-top: 40px;            
+        }
+        #pricingTable tr:first-child {
+            background-color: #efa501;
+            text-shadow: 3px 2px black;
+            height: 40px;
+            color: white;
+        }
+        #pricingTable th {
+            border: solid #3b4144 1px;
+            text-align: center;
+        }
+        #pricingTable th:first-child, #s_1293 #pricingTable th:last-child {
+            border-top-left-radius: 3px;
+            border-top-right-radius: 3px;
+        }
+        #pricingTable td:first-child, #s_1293 #pricingTable th:first-child {
+            width: 50%;     
+        }
+        #pricingTable td:first-child {
+            text-align: left;
+        }
+        #pricingTable td {
+            width: 16.66%;
+            border: solid #9da0a2 1px; 
+            text-align: center;
+        }
+        #pricingTable th:first-child, #pricingTable td:first-child {
+            padding-left: 5px;
+        }
+
+        #pricingTable span {
+            color: #fff;
+            font-size: inherit !important;
+            font-weight: 600;
+            line-height: 1.7em;
+        }        
     </style>
 
     <div id="policies">
