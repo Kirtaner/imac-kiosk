@@ -162,6 +162,15 @@ if (Meteor.isClient) {
     };
   });
 
+  Template.registerHelper('acquisitionOptionsRecall', function(){
+    return {
+      CSRH: "Web Search",
+      CREF: "Referral",
+      _CREF: "Walk-in",
+      CSAM: "Note 7 Recall"
+    };
+  });
+
   Template.registerHelper('policyPane', function(){
     return Session.get('policyPane');
   });
