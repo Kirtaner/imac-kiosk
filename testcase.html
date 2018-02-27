@@ -60,7 +60,7 @@
         .brand-warning {
             color: rgba(239, 165, 1, 1) !important;
             margin-bottom: 25px;
-        }       
+        }
         #policyContainer #placeholderPane {
             line-height: 94px;
         }
@@ -110,7 +110,7 @@
         }
         ol {
             margin-left: 25px;
-        } 
+        }
         .kiosk-big {
             font-size: 1.3em;
         }
@@ -123,8 +123,8 @@
         }
         .flowchart {
             margin-left: 290px;
-        } 
-        .section-heading-h2 { 
+        }
+        .section-heading-h2 {
         color: rgba(239, 165, 1, 1);
         font-weight:bold;
         margin-top:30px;
@@ -144,7 +144,7 @@
             font-size: 1em;
             border: 0;
             box-shadow: 3px 5px 14px #333222;
-            margin-top: 40px;            
+            margin-top: 40px;
         }
         #pricingTable tr:first-child {
             background-color: #efa501;
@@ -161,14 +161,14 @@
             border-top-right-radius: 3px;
         }
         #pricingTable td:first-child, #s_1293 #pricingTable th:first-child {
-            width: 50%;     
+            width: 50%;
         }
         #pricingTable td:first-child {
             text-align: left;
         }
         #pricingTable td {
             width: 16.66%;
-            border: solid #9da0a2 1px; 
+            border: solid #9da0a2 1px;
             text-align: center;
         }
         #pricingTable th:first-child, #pricingTable td:first-child {
@@ -180,7 +180,7 @@
             font-size: inherit !important;
             font-weight: 600;
             line-height: 1.7em;
-        }        
+        }
     </style>
 
     <div id="policies">
@@ -211,7 +211,7 @@
     <script type="text/javascript">
         Session.set('policyPane', 'iframePlaceholder');
 
-        setTimeout(function(){                
+        setTimeout(function(){
             $('.list-group a:first-child').click();
         }, 1000);
 
@@ -220,7 +220,7 @@
             var url = $(this).data('url') + '?keyword=kiosk-nohead';
             $('.list-group a').removeClass('active');
             $(this).addClass('active');
-            title = $(this).text();        
+            title = $(this).text();
 
 
             HTTP.call("GET", url, function(error, result){
@@ -249,10 +249,10 @@
                     $('.policyPageContainer').css('max-height', $('div.list-group').height());
                     $('#policyIndex').css('display', 'none');
                     $('#back').css('display', 'inline-block');
-                    $('#policyContainer').addClass('col-sm-12').removeClass('col-sm-9');                    
+                    $('#policyContainer').addClass('col-sm-12').removeClass('col-sm-9');
                     $('<h2 id="policyTitle">'+title+'</h2>').appendTo('#policyHeader');
-                    $('#policies').css('margin-top', '180px');                   
-                    
+                    $('#policies').css('margin-top', '180px');
+
                 }
 
             });
@@ -341,7 +341,7 @@
         .brand-warning {
             color: rgba(239, 165, 1, 1) !important;
         }
-        .section-heading-h2 { 
+        .section-heading-h2 {
         color: rgba(239, 165, 1, 1);
         font-weight:bold;
         margin:0;
@@ -352,7 +352,7 @@
 
         @media only screen and (max-width: 1026px) {
         .section-heading-h2 { font-size:.7em !Important;}
-        .section-title-b {height:40px !Important;}              
+        .section-title-b {height:40px !Important;}
     </style>
 
     <div id="policies">
@@ -394,7 +394,7 @@
                     data = $.parseHTML(result.content);
                     $(data).find('img').each(function () {
                         src = $(this).attr('src');
-                        newSrc = 'http://techknowspace.com' + src;
+                        newSrc = 'http://linode.techknowspace.com' + src;
                         $(this).attr('src',newSrc);
                     });
                     var text = '';

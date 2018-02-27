@@ -157,7 +157,8 @@ if (Meteor.isClient) {
   Template.registerHelper('acquisitionOptions', function(){
     return {
       CSRH: "Web Search",
-      CREF: "Someone Told You About Us",
+      CVID: "Video Ad",
+      CREF: "Friend or Family",
       _CREF: "Walk-in"
     };
   });

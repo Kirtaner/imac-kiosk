@@ -153,6 +153,11 @@
 </template>
 
 <template name="confirmationModal">
+    <style type="text/css">
+        #autoFormNormal {
+            display: none;
+        }
+    </style>
 
     <div class="modal fade">
         <div class="container" id="confirm" style="margin-top:36em">
@@ -176,6 +181,15 @@
                                 {{ companyName }}<br>
                             {{/with }}
 
+                            <div id="{{ currentForm }}">
+
+                                You understand that:<br>
+                                1. You have to pay a refundable $40 for diagnostics. If your repair is found eligible for warranty after completion of diagnostics, the $40 is refunded to you<br>
+                                2. You will lose all your data<br>
+                                3. If we can complete your warranty repair, it could take up to 2 business days<br>
+                                4. If your device has to be sent to a Samsung specialist, it could take from 3 to 10 business days to complete your repair<br><br>
+
+                            </div>
                             <button id="accept" class="btn btn-success" style="margin-right: 10px">Confirm</button>
                             <button id="cancel" class="btn btn-danger">Cancel</button>
                         </div>
