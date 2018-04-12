@@ -30,7 +30,6 @@ if (Meteor.isClient) {
 
   var randomTTSCallout = function() {
     frames = Array('consoles',
-                   'samsungServiceCentre',
                    'apple',
                    'dataRecovery',
                    'liquidDamage',
